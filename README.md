@@ -1,6 +1,6 @@
-# Group_17_Spoon-Feed-Me </br> </br>
+# Group_17_Spoon-Feed-Me </br>
 
-How To Install/View:
+How To Install/View: </br>
 1. Node.js (Node Package Manager npm should come with node install) </br>
 2. Install ionic and cordova : "npm install -g cordova ionic" </br>
 3. Clone repo </br>
