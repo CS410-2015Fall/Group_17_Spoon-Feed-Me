@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>Spoon Feed Me</title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -24,9 +24,30 @@
   <body ng-app="starter">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Spoon Feed Me</h1>
       </ion-header-bar>
+
+      <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-energized">
+        <ion-tab icon-on="ion-android-search" icon-off="ion-android-search">
+          <ion-content>
+            <div class="list list-inset" style="margin-top: 8em;">
+              <label class="item item-input">
+                <i class="icon ion-android-search placeholder-icon"></i>
+                <input type="text" placeholder="Search">
+              </label>
+              <h4> -- Search Results Below --</h4>
+            </div>
+          </ion-content>
+        </ion-tab>
+        <ion-tab icon-on="ion-android-star" icon-off="ion-android-star-outline">
+          <ion-content>
+            <div style="margin-top: 8em;">
+              <h4> -- Saved Recipes Below--</h4>
+            </div>
+          </ion-content>
+        </ion-tab>
+      </ion-tabs>
       <ion-content>
       </ion-content>
     </ion-pane>
