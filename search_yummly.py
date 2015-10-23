@@ -1,5 +1,10 @@
 from yummly import Client
 
+"""
+returns list of tuples 
+[(recipe_name0, url0), ..., (recipe_nameN, urlN)]
+"""
+
 def search(search_terms):
 	TIMEOUT = 5.0
 	RETRIES = 0
@@ -11,7 +16,8 @@ def search(search_terms):
 	query = 'allrecipes+'+search_terms
 	print query
 	params = {
-		'q': query
+		'q': query,
+		'maxResult': 10
 	}
 
 	search = client.search(**params)
@@ -22,6 +28,6 @@ def search(search_terms):
 		recipe = client.recipe(match.id)
 		recipe_source = recipe['source']
 		
-		urls.append(recipe_source['sourceRecipeUrl'])
+		urls.append((recipe.name, recipe_source['sourceRecipeUrl']))
 
 	return urls
