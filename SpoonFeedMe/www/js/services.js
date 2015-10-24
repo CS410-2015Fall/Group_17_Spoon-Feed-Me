@@ -1,6 +1,6 @@
-angular.module('starter.services', [])
+angular.module('SpoonFeedMe.services', [])
 
-.factory('Saved', function() {
+.factory('RecipeService', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Calling saved data from phone? Or calling server to get reipes
@@ -44,6 +44,18 @@ angular.module('starter.services', [])
   }];
 
   return {
+    getFromSearch: function(searchQuery) {
+
+      var retVal = "something";
+
+      return $http.get("http://45.55.223.121/"+searchQuery).then (
+        function(payload) {
+          return payload.data;
+        },
+        function(error) {
+          console.log("Error",error.status);
+        });
+    },
     all: function() {
       return savedRecipes;
     },

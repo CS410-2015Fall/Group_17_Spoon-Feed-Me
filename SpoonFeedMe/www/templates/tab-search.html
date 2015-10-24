@@ -3,8 +3,11 @@
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" ng-model="search.query">
       </label>
+      <button class="button" ng-click="getRecipes(search.query)">Search</button>
+      <h3>Current Query: {{search.query}}</h3>
+      <p> {{content}} </p>
     </div>
   </ion-content>
 </ion-view>
