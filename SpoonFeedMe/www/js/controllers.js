@@ -34,7 +34,7 @@ angular.module('SpoonFeedMe.controllers', [])
 
 })
 
-.controller('WalkthroughCtrl', function($scope, $stateParams, RecipeService) {
+.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
 
   $scope.recipeId = $stateParams.recipeId;
   $scope.recipe = RecipeService.get($stateParams.recipeId);
@@ -55,6 +55,10 @@ angular.module('SpoonFeedMe.controllers', [])
     $scope.currentStepNum-=1;
     $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
 
+  }
+
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
   }
 
 })
