@@ -76,3 +76,9 @@ angular.module('SpoonFeedMe.controllers', [])
   $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
   $scope.fromSavedOrSearch = "search";
 })
+
+.controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
+  var searchPayload = RecipeService.getSearchPayload();
+  $scope.single = searchPayload[$stateParams.recipeId];
+  $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
+})

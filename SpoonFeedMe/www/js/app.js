@@ -73,6 +73,7 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
     controller: 'WalkthroughCtrl'
   })
 
+
   .state('tab.search-detail', {
       url: '/search/:recipeId',
       views: {
