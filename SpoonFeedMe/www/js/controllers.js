@@ -36,7 +36,6 @@ angular.module('SpoonFeedMe.controllers', [])
 })
 
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
-
   $scope.recipeId = $stateParams.recipeId;
   if($stateParams.fromSavedOrSearch == "saved") {
     $scope.recipe = RecipeService.get($stateParams.recipeId);
@@ -75,10 +74,4 @@ angular.module('SpoonFeedMe.controllers', [])
   $scope.single = searchPayload[$stateParams.recipeId];
   $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
   $scope.fromSavedOrSearch = "search";
-})
-
-.controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
-  var searchPayload = RecipeService.getSearchPayload();
-  $scope.single = searchPayload[$stateParams.recipeId];
-  $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
 })
