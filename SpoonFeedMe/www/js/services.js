@@ -46,13 +46,13 @@ angular.module('SpoonFeedMe.services', [])
   return {
     getFromSearch: function(searchQuery) {
 
-      return $http.get("http://45.55.223.121/"+searchQuery).then (
+      return $http.get("http://45.55.223.121/" + searchQuery).then (
         function(payload) {
           searchPayload = payload.data;
           return payload.data;
         },
         function(error) {
-          console.log("Error",error.status);
+          console.log("Error", error.status);
         });
     },
     all: function() {

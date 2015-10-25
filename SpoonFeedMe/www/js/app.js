@@ -56,18 +56,19 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
         }
       }
   })
+
   .state('tab.saved-detail', {
       url: '/saved/:recipeId',
       views: {
         'tab-saved': {
-          templateUrl: 'templates/saved-detail.html',
+          templateUrl: 'templates/recipe-detail.html',
           controller: 'SavedDetailCtrl'
         }
       }
     })
 
   .state('walkthrough', {
-    url: '/walkthrough/:recipeId',
+    url: '/walkthrough/:recipeId/:fromSavedOrSearch',
     templateUrl: 'templates/walkthrough.html',
     controller: 'WalkthroughCtrl'
   })
@@ -76,7 +77,7 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
       url: '/search/:recipeId',
       views: {
         'tab-search': {
-          templateUrl: 'templates/saved-detail.html',
+          templateUrl: 'templates/recipe-detail.html',
           controller: 'SearchDetailCtrl'
         }
       }

@@ -28,6 +28,7 @@ angular.module('SpoonFeedMe.controllers', [])
   $scope.recipeId = $stateParams.recipeId;
   $scope.single = RecipeService.get($stateParams.recipeId);
   $scope.instructions = RecipeService.get($stateParams.recipeId).instructions;
+  $scope.fromSavedOrSearch = "saved";
 
   $scope.toWalkthrough = function(title) {
   };
@@ -37,7 +38,12 @@ angular.module('SpoonFeedMe.controllers', [])
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
 
   $scope.recipeId = $stateParams.recipeId;
-  $scope.recipe = RecipeService.get($stateParams.recipeId);
+  if($stateParams.fromSavedOrSearch == "saved") {
+    $scope.recipe = RecipeService.get($stateParams.recipeId);
+  } else if($stateParams.fromSavedOrSearch == "search") {
+    var searchPayload = RecipeService.getSearchPayload();
+    $scope.recipe = searchPayload[$scope.recipeId];
+  }
 
   $scope.currentStepNum = 1;
   $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
@@ -64,7 +70,9 @@ angular.module('SpoonFeedMe.controllers', [])
 })
 
 .controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
+  $scope.recipeId = $stateParams.recipeId;
   var searchPayload = RecipeService.getSearchPayload();
   $scope.single = searchPayload[$stateParams.recipeId];
   $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
+  $scope.fromSavedOrSearch = "search";
 })
