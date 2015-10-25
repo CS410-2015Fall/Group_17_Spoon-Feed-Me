@@ -1,11 +1,15 @@
 angular.module('SpoonFeedMe.controllers', [])
 
-.controller('SearchCtrl', function($scope, RecipeService) {
+.controller('SearchCtrl', function($scope, $ionicLoading, RecipeService) {
   $scope.content="";
-
   $scope.getRecipes = function(searchTerms) {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="android"></ion-spinner>',
+      animation: 'fade-in'
+    })
     RecipeService.getFromSearch(searchTerms).then(function (recipeData) {
       $scope.content = recipeData;
+      $ionicLoading.hide()
   })};
 
 })
