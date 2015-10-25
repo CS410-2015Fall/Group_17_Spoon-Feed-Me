@@ -66,6 +66,15 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
       }
     })
 
+  .state('tab.search-detail', {
+      url: '/search/:recipeId',
+      views: {
+        'tab-search': {
+          templateUrl: 'templates/saved-detail.html',
+          controller: 'SearchDetailCtrl'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/search');
 
