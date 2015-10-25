@@ -6,11 +6,9 @@
         <input type="text" placeholder="Search" ng-model="search.query">
       </label>
       <button class="button" ng-click="getRecipes(search.query)">Search</button>
-<!--       <h3>Current Query: {{search.query}}</h3>
-      <p> {{content}} </p> -->
     </div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in content" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in content" type="item-text-wrap" href="#/tab/search/{{$index}}">
         <!-- <img ng-src="{{recipe.image}}"> -->
         <h2>{{recipe.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
