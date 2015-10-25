@@ -1,5 +1,4 @@
-from bs4 import BeautifulSoup
-from bs4 import SoupStrainer
+from lxml import html
 import requests
 
 import logging
@@ -23,31 +22,26 @@ returns dictionary
 """
 def get_recipe(urls):
 
-	steps_list = SoupStrainer('ol')
-
 	ua = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:32.0) Gecko/20100101 Firefox/32.0'
 	headers = {'User-Agent': ua, 'Accept': '*/*'}
 
-	# urls =['http://allrecipes.com/recipe/10402/the-best-rolled-sugar-cookies/', 'http://allrecipes.com/recipe/146819/spooky-witches-fingers/', 'http://allrecipes.com/recipe/9920/peanut-blossoms-ii/']
-
-	all_recipes = {}
+	all_recipes = []
 	for url in urls:
+		logging.warning(url)
 		if "allrecipes" in url[1]:
 			logging.warning(url[1])
 			try:
-				resp = requests.get(url[1], headers=headers, timeout=2)
-				soup = BeautifulSoup(resp.text, "lxml", parse_only=steps_list)
+				page = requests.get(url[1], headers=headers, timeout=2)
 
-				
-				steps = []
+				tree = html.fromstring(page.text)
+				path = '/html/body/div[1]/div[2]/div/div/section/section[3]/div/div/ol[1]/li/span/text()'
+				steps = tree.xpath(path)
 				recipe = {}
-				for step in soup.find_all('span', 'recipe-directions__list--item'):
-					steps.append(step.text)
-
+				recipe['name'] = url[0]
 				recipe['url'] = url[1]
 				recipe['ingredients'] = url[2]
 				recipe['instructions'] = steps
-				all_recipes[url[0]] = recipe
+				all_recipes.append(recipe)
 
 			except requests.exceptions.Timeout:
 				logging.warning("TIMEOUT!!!!!!!!")
