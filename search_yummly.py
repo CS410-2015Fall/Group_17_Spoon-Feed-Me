@@ -28,6 +28,6 @@ def search(search_terms):
 		recipe = client.recipe(match.id)
 		recipe_source = recipe['source']
 		
-		urls.append((recipe.name, recipe_source['sourceRecipeUrl']))
+		urls.append((recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines))
 
 	return urls
