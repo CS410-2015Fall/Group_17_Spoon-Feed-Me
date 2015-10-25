@@ -5,11 +5,7 @@ angular.module('SpoonFeedMe.controllers', [])
 
   $scope.getRecipes = function(searchTerms) {
     RecipeService.getFromSearch(searchTerms).then(function (recipeData) {
-      $scope.content = [];
-      angular.forEach(recipeData[0], function(value, key) {
-        value.title = key;
-        $scope.content.push(value);
-      });
+      $scope.content = recipeData;
   })};
 
 })
