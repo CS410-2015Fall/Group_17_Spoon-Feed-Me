@@ -27,15 +27,14 @@ def get_recipe(urls):
 
 	all_recipes = []
 	for url in urls:
-		logging.warning(url)
 		if "allrecipes" in url[1]:
-			logging.warning(url[1])
 			try:
 				page = requests.get(url[1], headers=headers, timeout=2)
 
 				tree = html.fromstring(page.text)
 				path = '/html/body/div[1]/div[2]/div/div/section/section[3]/div/div/ol[1]/li/span/text()'
 				steps = tree.xpath(path)
+				
 				recipe = {}
 				recipe['name'] = url[0]
 				recipe['url'] = url[1]
@@ -48,5 +47,4 @@ def get_recipe(urls):
 			except requests.exceptions.ConnectionError:
 				logging.warning("CONNECTIONERROR!!!!!!!")
 
-	logging.warning(all_recipes)
 	return all_recipes
