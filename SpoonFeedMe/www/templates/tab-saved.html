@@ -1,7 +1,7 @@
 <ion-view view-title="Saved Recipes">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in saved" type="item-text-wrap" href="#/tab/saved/{{recipe.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in saved" type="item-text-wrap" href="#/tab/saved/{{$index}}">
         <img ng-src="{{recipe.image}}">
         <h2>{{recipe.title}}</h2>
         <p>{{recipe.summary}}</p>

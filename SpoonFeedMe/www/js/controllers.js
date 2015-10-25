@@ -26,4 +26,5 @@ angular.module('SpoonFeedMe.controllers', [])
 
 .controller('SavedDetailCtrl', function($scope, $stateParams, RecipeService) {
   $scope.single = RecipeService.get($stateParams.recipeId);
+  $scope.instructions = RecipeService.get($stateParams.recipeId).instructions;
 })

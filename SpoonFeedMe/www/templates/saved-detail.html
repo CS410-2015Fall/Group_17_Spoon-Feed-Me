@@ -7,11 +7,8 @@
 <ion-view view-title="{{single.title}}">
   <ion-content class="padding">
     <img ng-src="{{single.image}}" style="width: 64px; height: 64px">
-    <p>
-      {{single.ingredients}}
-    </p>
-    <p>
-      {{single.instructions}}
-    </p>
+    <ul ng-repeat="i in instructions">
+      <p> {{i}} </p>
+    </ul>
   </ion-content>
 </ion-view>
