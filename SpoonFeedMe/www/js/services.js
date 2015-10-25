@@ -46,8 +46,6 @@ angular.module('SpoonFeedMe.services', [])
   return {
     getFromSearch: function(searchQuery) {
 
-      var retVal = "something";
-
       return $http.get("http://45.55.223.121/"+searchQuery).then (
         function(payload) {
           return payload.data;
