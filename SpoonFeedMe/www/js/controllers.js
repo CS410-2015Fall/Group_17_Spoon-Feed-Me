@@ -25,6 +25,40 @@ angular.module('SpoonFeedMe.controllers', [])
 })
 
 .controller('SavedDetailCtrl', function($scope, $stateParams, RecipeService) {
+  $scope.recipeId = $stateParams.recipeId;
   $scope.single = RecipeService.get($stateParams.recipeId);
   $scope.instructions = RecipeService.get($stateParams.recipeId).instructions;
+
+  $scope.toWalkthrough = function(title) {
+  };
+
+})
+
+.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
+
+  $scope.recipeId = $stateParams.recipeId;
+  $scope.recipe = RecipeService.get($stateParams.recipeId);
+
+  $scope.currentStepNum = 1;
+  $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+  $scope.maxStepNum = $scope.recipe.instructions.length;
+
+  $scope.nextStep = function() {
+
+    $scope.currentStepNum+=1;
+    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+
+  }
+
+  $scope.prevStep = function() {
+
+    $scope.currentStepNum-=1;
+    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+
+  }
+
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  }
+
 })

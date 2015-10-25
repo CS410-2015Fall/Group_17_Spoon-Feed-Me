@@ -66,6 +66,12 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
       }
     })
 
+  .state('walkthrough', {
+    url: '/walkthrough/:recipeId',
+    templateUrl: 'templates/walkthrough.html',
+    controller: 'WalkthroughCtrl'
+  })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/search');
 
