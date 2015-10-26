@@ -6,7 +6,7 @@ angular.module('SpoonFeedMe.services', [])
   // Calling saved data from phone? Or calling server to get reipes
   // Some fake testing data
   var savedRecipes = [{
-    title: 'Chocolate-Covered OREO Cookie Cake',
+    name: 'Chocolate-Covered OREO Cookie Cake',
     summary: 'Best Ice Cream Sandwich Recipe',
     image: 'http://images.sweetauthoring.com/recipe/133036_977.jpg',
     ingredients: [
@@ -25,7 +25,7 @@ angular.module('SpoonFeedMe.services', [])
         "Place 1 cake layer on plate, spread with cream cheese mixture. Top with remaining cake layer. Spread top with chocolate glaze; let stand 10 min. or until firm. Keep refrigerated."
     ]
   }, {
-    title: 'Coconut Poke Cake',
+    name: 'Coconut Poke Cake',
     summary: 'Best Coconut Poke Cake Recipe',
     image: 'http://images.media-allrecipes.com/userphotos/250x250/334118.jpg',
     ingredients: [
@@ -41,15 +41,18 @@ angular.module('SpoonFeedMe.services', [])
     ]
   }];
 
+  var searchPayload;
+
   return {
     getFromSearch: function(searchQuery) {
 
-      return $http.get("http://45.55.223.121/"+searchQuery).then (
+      return $http.get("http://45.55.223.121/" + searchQuery).then (
         function(payload) {
+          searchPayload = payload.data;
           return payload.data;
         },
         function(error) {
-          console.log("Error",error.status);
+          console.log("Error", error.status);
         });
     },
     all: function() {
@@ -60,6 +63,9 @@ angular.module('SpoonFeedMe.services', [])
     },
     get: function(recipeId) {
       return savedRecipes[parseInt(recipeId)];
+    },
+    getSearchPayload: function() {
+      return searchPayload;
     }
   };
 });
