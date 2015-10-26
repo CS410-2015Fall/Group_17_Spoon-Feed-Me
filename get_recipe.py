@@ -11,13 +11,14 @@ returns dictionary
 
 	{	recipe_name:	<recipe0>,
 		url:			<url0>,
-		instructions:	[step1'\n'...stepN'\n']
+		instructions:	[step1'\n'...stepN'\n'],
+		ingredients:	[],
+		imgUrl:			<>,
+		time:			<>,
+		servings:		<>
 	}
 	...
-	{	recipe_name:	<recipeN>,
-		url:			<urlN>,
-		instructions:	[step1'\n'...stepN'\n']
-	}
+
 }
 """
 def get_recipe(urls):
@@ -40,6 +41,9 @@ def get_recipe(urls):
 				recipe['url'] = url[1]
 				recipe['ingredients'] = url[2]
 				recipe['instructions'] = steps
+				recipe['imgUrl'] = url[3]
+				recipe['time'] = url[4]
+				recipe['servings'] = url[5]
 				all_recipes.append(recipe)
 
 			except requests.exceptions.Timeout:

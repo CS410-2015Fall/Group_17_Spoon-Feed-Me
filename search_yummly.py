@@ -2,7 +2,7 @@ from yummly import Client
 
 """
 returns list of tuples 
-[(recipe_name0, url0), ..., (recipe_nameN, urlN)]
+[(recipe_name, url, ingredients, imgUrl, time, servings), ...]
 """
 
 def search(search_terms):
@@ -27,7 +27,8 @@ def search(search_terms):
 	for match in matches:
 		recipe = client.recipe(match.id)
 		recipe_source = recipe['source']
+		recipe_img = recipe['images']
 		
-		urls.append((recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines))
+		urls.append((recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines, recipe_img['hostedSmallUrl'], recipe.totalTime, recipe.yields))
 
 	return urls
