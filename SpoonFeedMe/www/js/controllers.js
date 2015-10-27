@@ -70,6 +70,17 @@ angular.module('SpoonFeedMe.controllers', [])
     $ionicHistory.goBack();
   }
 
+
+  $scope.voice = function(){
+      var u = new SpeechSynthesisUtterance();
+      var text = $scope.currentStep;
+     u.text = text;
+     u.lang = 'en-US';
+     u.rate = 1;
+     u.onend = function(event) { alert('Finished in ' + event.elapsedTime + ' seconds.'); }
+     speechSynthesis.speak(u);
+  }
+
 })
 
 .controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
