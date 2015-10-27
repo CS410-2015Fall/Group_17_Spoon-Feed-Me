@@ -70,6 +70,33 @@ angular.module('SpoonFeedMe.controllers', [])
     $ionicHistory.goBack();
   }
 
+  var recognition;
+
+  $scope.$on("$ionicView.beforeEnter", function() {
+    alert("Starting voice recognition...");
+    recognition = new SpeechRecognition();
+    recognition.onresult = function(event) {
+        if (event.results.length > 0) {
+          var heardValue = event.results[0][0].transcript;
+          if(heardValue == "next") {
+            alert("I heard next...");
+            $scope.nextStep();
+            $scope.$apply();
+          } else if(heardValue == "previous") {
+            alert("I heard previous...");
+            $scope.prevStep();
+            $scope.$apply();
+          }
+        }
+    }
+    recognition.start();
+  });
+
+  $scope.$on("$ionicView.beforeLeave", function() {
+    alert("Stopping voice recognition...");
+    recognition.abort();
+  });
+
 })
 
 .controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
