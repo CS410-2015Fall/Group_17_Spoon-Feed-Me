@@ -1,3 +1,7 @@
+sudo: required
 language: node_js
+before_install:
+- sudo apt-get install python
 script:
-  - echo "Hello World"
+- echo "Hello World"
+- python server/test_server.py

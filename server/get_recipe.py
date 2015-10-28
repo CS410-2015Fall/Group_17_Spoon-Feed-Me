@@ -9,8 +9,8 @@ logging.basicConfig(filename='debug_logs.log', level=logging.DEBUG)
 returns dictionary
 {
 
-	{	recipe_name:	<recipe0>,
-		url:			<url0>,
+	{	recipe_name:	<>,
+		url:			<>,
 		instructions:	[step1'\n'...stepN'\n'],
 		ingredients:	[],
 		imgUrl:			<>,
@@ -44,7 +44,9 @@ def get_recipe(urls):
 				recipe['imgUrl'] = url[3]
 				recipe['time'] = url[4]
 				recipe['servings'] = url[5]
-				all_recipes.append(recipe)
+
+				if steps:
+					all_recipes.append(recipe)
 
 			except requests.exceptions.Timeout:
 				logging.warning("TIMEOUT!!!!!!!!")
