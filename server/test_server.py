@@ -48,3 +48,6 @@ class TestServer(unittest.TestCase):
 		self.assertEqual('Set oven to broil.', instructions[0])
 		self.assertEqual('Spread butter on one side of each slice of bread. Place apple slices on buttered side of bread. Sprinkle cinnamon on top. Place bread on a baking sheet.', instructions[1])
 		self.assertEqual('Place in a preheated oven until toasted, about 2 minutes.', instructions[2])
+
+if __name__ == '__main__':
+    unittest.main()
