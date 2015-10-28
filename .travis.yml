@@ -4,4 +4,4 @@ before_install:
 - sudo apt-get install python
 script:
 - echo "Hello World"
-- python test_server.py
+- python server/test_server.py
