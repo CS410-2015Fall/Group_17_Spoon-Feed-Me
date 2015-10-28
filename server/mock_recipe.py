@@ -1,67 +1,64 @@
-[
-	{
-		"url": "http://allrecipes.com/recipe/easy-banana-brownies/",
-		 "instructions": 
-		 	[
-		 		"Preheat an oven to 325 degrees F (165 degrees C). Grease an 8 inch square pan.", 
-		 		"Melt butter in sauce pan over medium-low heat. Remove from heat, add chips, and stir until melted. Set aside to cool for 5 minutes.",
-		 		"Lightly beat the egg in a medium bowl. Stir in the brown sugar, banana, vanilla, and salt. Pour the melted chocolate mixture into the banana mixture, and stir until well combined. Add the flour, stirring just until incorporated. Spread the batter into the prepared pan.",
-		 	 	"Bake in the preheated oven until a toothpick inserted near the center comes out with moist crumbs, about 30 minutes. Don't over bake. Remove, and cool pan on wire rack before cutting."
-		 	 ],
-		 	"name": "Easy Banana Brownies",
-		 	"ingredients": 
-			 	[
-			 		"1/2 cup butter",
-			 		"2/3 cup semisweet chocolate chips", 
-			 		"1 large egg", 
-			 		"2/3 cup packed light brown sugar", 
-			 		"1 small ripe banana, mashed", 
-			 		"1/2 teaspoon vanilla extract", 
-			 		"1/4 teaspoon salt", 
-			 		"3/4 cup all-purpose flour"
-			 	]
+
+def get_recipe():
+	results = [{
+	    "name": "Healthy Honey and Apple Muffins",
+	    "ingredients": [
+	        "2 egg whites",
+	        "250g wholemeal plain flour",
+	        "1 tablespoon baking powder",
+	        "1/2 teaspoon salt",
+	        "1 teaspoon ground cinnamon",
+	        "3/4 cup low fat milk",
+	        "4 tablespoons vegetable oil",
+	        "4 tablespoons honey",
+	        "125g chopped apples"
+	    ],
+	    "url": "http://allrecipes.com.au/recipe/733/healthy-honey-and-apple-muffins.aspx?o_ln=SimRecipes_Link_6&o_is=SimilarRecipes",
+	    "servings": "Serves: 12",
+	    "time": "30 min",
+	    "imgUrl": "https://lh3.googleusercontent.com/Ottj5glw-aMbVu25GJssXjxmgKxh7E6AaK4-lrBNzMMJmZgjkqIlEDNkT41ucQ6NjqSUt0_0ohEV_1vAHbkP=s90",
+	    "instructions": [
+	        
+	    ]
 	},
 	{
-		"url": "http://allrecipes.com/recipe/quick-and-easy-brownies/", 
-		"instructions": 
-			[
-				"Melt the butter or margarine and mix all ingredients in the order given.", 
-				"Bake at 350 degrees F (175 degrees C) for 20 to 30 minutes in a 9 x 13 inch greased pan."
-			], 
-		"name": "Quick and Easy Brownies", 
-		"ingredients": 
-			[
-				"2 cups white sugar", 
-				"1 cup butter", 
-				"1/2 cup cocoa powder", 
-				"1 teaspoon vanilla extract", 
-				"4 eggs", 
-				"1 1/2 cups all-purpose flour", 
-				"1/2 teaspoon baking powder", 
-				"1/2 teaspoon salt", 
-				"1/2 cup walnut halves"
-			]
-	}, 
+	    "name": "Apple Banana Smoothie",
+	    "ingredients": [
+	        "1 frozen bananas, peeled and chopped",
+	        "1/2 cup orange juice",
+	        "1 Gala apple, peeled, cored and chopped",
+	        "1/4 cup milk"
+	    ],
+	    "url": "http://allrecipes.com/Recipe/apple-banana-smoothie/detail.aspx",
+	    "servings": "2 servings",
+	    "time": "5 Min",
+	    "imgUrl": "http://lh4.ggpht.com/FR6dVW0THRw3ox9Y4BXieVGz8-5cvdD4R55D7uFn5Y3pGil9ONjujrgYugKv29xYB7Gi0p27V9-G_CyeKiROvg=s90",
+	    "instructions": [
+	        "In a blender combine frozen banana, orange juice, apple and milk. Blend until smooth. pour into glasses and serve."
+	    ]
+	},
 	{
-		"url": "http://allrecipes.com/recipe/mmmmm-brownies/", 
-		"instructions": 
-			[
-				"Preheat the oven to 325 degrees F (165 degrees C). Grease an 8x8 inch square pan.", 
-				"In a medium saucepan, combine the sugar, butter and water. Cook over medium heat until boiling. Remove from heat and stir in chocolate chips until melted and smooth. Mix in the eggs and vanilla. Combine the flour, baking soda and salt; stir into the chocolate mixture. Spread evenly into the prepared pan.", 
-				"Bake for 25 to 30 minutes in the preheated oven, until brownies set up. Do not overbake! Cool in pan and cut into squares."
-			], 
-		"name": "MMMMM... Brownies", 
-		"ingredients": 
-			[
-				"1/2 cup white sugar", 
-				"2 tablespoons butter", 
-				"2 tablespoons water", 
-				"1 1/2 cups semisweet chocolate chips", 
-				"2 eggs", 
-				"1/2 teaspoon vanilla extract", 
-				"2/3 cup all-purpose flour", 
-				"1/4 teaspoon baking soda", 
-				"1/2 teaspoon salt"
-			]
-	}
-]
+	    "name": "Apple Toast",
+	    "ingredients": [
+	        "1 tablespoon butter",
+	        "4 slices white or whole wheat bread",
+	        "1 tablespoon cinnamon",
+	        "1 large apple, cored and thinly sliced"
+	    ],
+	    "url": "http://allrecipes.com/Recipe/apple-toast-2/detail.aspx",
+	    "servings": "4 servings",
+	    "time": "5 min",
+	    "imgUrl": "http://lh3.ggpht.com/MpQq95RkQ3I3YbjevZ1dbvX1CWNaan2gAqepqu_aGaFUIGOAGxCNTSyUtqUqAeNdGhCZLmoqBV8XilVnpKcbFA=s90",
+	    "instructions": [
+	        "Set oven to broil.",
+	        "Spread butter on one side of each slice of bread. Place apple slices on buttered side of bread. Sprinkle cinnamon on top. Place bread on a baking sheet.",
+	        "Place in a preheated oven until toasted, about 2 minutes."
+	    ]
+	}]
+
+	recipes = []
+	for recipe in results:
+		if recipe['instructions']:
+			recipes.append(recipe)
+
+	return recipes

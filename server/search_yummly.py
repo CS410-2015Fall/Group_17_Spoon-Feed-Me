@@ -14,10 +14,10 @@ def search(search_terms):
 	client = Client(api_id=API_ID, api_key=API_KEY, timeout=TIMEOUT, retries=RETRIES)
 
 	query = 'allrecipes+'+search_terms
-	print query
+	
 	params = {
 		'q': query,
-		'maxResult': 10
+		'maxResult': 5
 	}
 
 	search = client.search(**params)
@@ -28,7 +28,8 @@ def search(search_terms):
 		recipe = client.recipe(match.id)
 		recipe_source = recipe['source']
 		recipe_img = recipe['images']
-		
-		urls.append((recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines, recipe_img['hostedSmallUrl'], recipe.totalTime, recipe.yields))
+
+		url = (recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines, recipe_img[0].hostedSmallUrl, recipe.totalTime, recipe.yields)
+		urls.append(url)
 
 	return urls
