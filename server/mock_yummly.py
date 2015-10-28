@@ -211,13 +211,13 @@ def search(search_terms):
 				    "id": "Hot-Turkey-Salad-Sandwiches-Allrecipes"
 				}
 
-	urls = []
+	results = []
 
 	recipe = mock_result
 	recipe_source = recipe['source']
 	recipe_img = recipe['images']
 
 	url = (recipe['name'], recipe_source['sourceRecipeUrl'], recipe['ingredientLines'], recipe_img[0]['hostedSmallUrl'], recipe['totalTime'], recipe['yield'])
-	urls.append(url)
+	results.append(url)
 
-	return urls
+	return results
