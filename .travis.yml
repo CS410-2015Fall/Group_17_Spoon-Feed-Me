@@ -4,4 +4,4 @@ before_install:
 - sudo apt-get install python
 script:
 - python server/test_server.py
-- cd SpoonFeedMe/ && npm install && npm test
+- cd SpoonFeedMe/ && npm install && bower install --no-interactive && npm test
