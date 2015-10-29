@@ -2,6 +2,11 @@ sudo: required
 language: node_js
 before_install:
 - sudo apt-get install python
+install:
+- cd SpoonFeedMe
+- npm install
+- bower install angular-mocks --save-dev
+- cd ..
 script:
 - python server/test_server.py
-- cd SpoonFeedMe && npm install && npm test
+- cd SpoonFeedMe && npm test
