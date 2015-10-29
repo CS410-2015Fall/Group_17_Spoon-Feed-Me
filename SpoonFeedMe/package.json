@@ -19,6 +19,9 @@
     "phantomjs": "~1.9.18",
     "karma-phantomjs-launcher": "~0.2.1"
   },
+  "scripts": {
+      "test": "./node_modules/.bin/karma start ./www/tests/unittests.conf.js --single-run --browsers PhantomJS"
+    },
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
