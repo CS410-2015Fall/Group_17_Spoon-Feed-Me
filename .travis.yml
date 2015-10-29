@@ -3,5 +3,5 @@ language: node_js
 before_install:
 - sudo apt-get install python
 script:
-- echo "Hello World"
 - python server/test_server.py
+- cd SpoonFeedMe && npm install && npm test
