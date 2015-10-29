@@ -2,7 +2,8 @@ sudo: required
 language: node_js
 before_install:
 - sudo apt-get install python
+install:
+- sudo npm install
 script:
 - python server/test_server.py
-- cd SpoonFeedMe/
-- sudo npm install && npm test
+- cd SpoonFeedMe/ && npm test
