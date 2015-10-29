@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <title></title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -12,6 +13,7 @@
 
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/tts.js"></script>
   </head>
   <body ng-app="SpoonFeedMe">
     <!--
@@ -26,6 +28,17 @@
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
+      <script>
+// basic usage
+TTS
+    .speak('hello, world!', function () {
+        alert('success');
+    }, function (reason) {
+        alert(reason);
+    });
+
+      </script>
+
     <ion-nav-view></ion-nav-view>
   </body>
 </html>
