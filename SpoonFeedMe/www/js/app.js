@@ -33,6 +33,7 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
+    
   })
 
   // Each tab has its own nav history stack:
