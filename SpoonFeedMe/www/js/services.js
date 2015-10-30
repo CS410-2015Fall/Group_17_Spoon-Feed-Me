@@ -1,6 +1,20 @@
 angular.module('SpoonFeedMe.services', [])
 
-.factory('RecipeService', function($http) {
+.factory('SearchService', function($http) {
+  return {
+    search: function(query){
+      return $http.get("http://45.55.223.121/" + query).then (
+        function(payload) {
+          return payload.data;
+        },
+        function(error) {
+          console.log("Error", error.status);
+        });
+    }
+  };
+})
+
+.factory('RecipeService', function(SearchService, $http) {
   // Might use a resource here that returns a JSON array
 
   // Calling saved data from phone? Or calling server to get reipes
@@ -45,15 +59,10 @@ angular.module('SpoonFeedMe.services', [])
 
   return {
     getFromSearch: function(searchQuery) {
-
-      return $http.get("http://45.55.223.121/" + searchQuery).then (
-        function(payload) {
-          searchPayload = payload.data;
-          return payload.data;
-        },
-        function(error) {
-          console.log("Error", error.status);
-        });
+      return SearchService.search(searchQuery).then(function (recipeData) {
+        searchPayload = recipeData;
+        return searchPayload;
+      });
     },
     all: function() {
       return savedRecipes;
