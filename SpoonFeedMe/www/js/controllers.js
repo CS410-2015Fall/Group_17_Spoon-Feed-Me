@@ -72,6 +72,30 @@ angular.module('SpoonFeedMe.controllers', [])
     $ionicHistory.goBack();
   }
 
+  $scope.$on("$ionicView.beforeEnter", function() {
+    alert("Starting voice recognition...");
+    $scope.recognition.onresult = function(event) {
+    if (event.results.length > 0) {
+      var heardValue = event.results[0][0].transcript;
+      if(heardValue == "next") {
+        // alert("I heard next...");
+        $scope.nextStep();
+        $scope.$apply();
+      } else if(heardValue == "back") {
+        // alert("I heard back...");
+        $scope.prevStep();
+        $scope.$apply();
+      }
+    }
+    }
+    $scope.recognition.start();
+  });
+
+  $scope.$on("$ionicView.beforeLeave", function() {
+    alert("Stopping voice recognition...");
+    $scope.recognition.abort();
+  });
+
 })
 
 .controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
@@ -80,4 +104,12 @@ angular.module('SpoonFeedMe.controllers', [])
   $scope.single = searchPayload[$stateParams.recipeId];
   $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
   $scope.fromSavedOrSearch = "search";
+})
+
+
+.controller('VoiceCtrl', function($scope, $stateParams) {
+  ionic.Platform.ready(function(){
+    // alert("Creating speech recognition handler...");
+    $scope.recognition = new SpeechRecognition();
+  });
 })
