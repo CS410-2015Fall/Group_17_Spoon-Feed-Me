@@ -58,14 +58,24 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
   })
 
   .state('tab.saved-detail', {
-      url: '/saved/:recipeId',
+      url: '/saved/:recipeId/:fromSavedOrSearch',
       views: {
         'tab-saved': {
           templateUrl: 'templates/recipe-detail.html',
-          controller: 'SavedDetailCtrl'
+          controller: 'RecipeDetailCtrl'
         }
       }
-    })
+  })
+
+  .state('tab.search-detail', {
+      url: '/search/:recipeId/:fromSavedOrSearch',
+      views: {
+        'tab-search': {
+          templateUrl: 'templates/recipe-detail.html',
+          controller: 'RecipeDetailCtrl'
+        }
+      }
+  })
 
   .state('walkthrough', {
     url: '/walkthrough/:recipeId/:fromSavedOrSearch',
@@ -73,16 +83,6 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
     controller: 'WalkthroughCtrl'
   })
 
-
-  .state('tab.search-detail', {
-      url: '/search/:recipeId',
-      views: {
-        'tab-search': {
-          templateUrl: 'templates/recipe-detail.html',
-          controller: 'SearchDetailCtrl'
-        }
-      }
-    })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/search');

@@ -1,8 +1,21 @@
 angular.module('SpoonFeedMe.controllers', [])
 
-.controller('SearchCtrl', function($scope, $ionicLoading, RecipeService) {
-  $scope.content="";
 
+// Controller for SpeechRecognition object creation
+.controller('VoiceCtrl', function($scope, $stateParams) {
+
+  ionic.Platform.ready(function(){
+    // alert("Creating speech recognition handler...");
+    $scope.recognition = new SpeechRecognition();
+  });
+
+})
+
+
+// Controller for recipe search
+.controller('SearchCtrl', function($scope, $ionicLoading, RecipeService) {
+
+  $scope.content="";
   $scope.getRecipes = function(searchTerms) {
     $ionicLoading.show({
       template: '<ion-spinner icon="android"></ion-spinner>',
@@ -16,35 +29,41 @@ angular.module('SpoonFeedMe.controllers', [])
   }
 })
 
+
+// Contoller for saved recipes
 .controller('SavedCtrl', function($scope, RecipeService) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-  $scope.saved = RecipeService.all();
+
+  $scope.saved = RecipeService.allRecipesFromSaved();
   $scope.remove = function(recipe) {
-    RecipeService.remove(recipe);
+    RecipeService.removeRecipeFromSaved(recipe);
   };
+
 })
 
-.controller('SavedDetailCtrl', function($scope, $stateParams, RecipeService) {
+
+// Controller for individual recipe details
+.controller('RecipeDetailCtrl', function($scope, $stateParams, RecipeService) {
+
   $scope.recipeId = $stateParams.recipeId;
-  $scope.single = RecipeService.get($stateParams.recipeId);
-  $scope.instructions = RecipeService.get($stateParams.recipeId).instructions;
-  $scope.fromSavedOrSearch = "saved";
-
-  $scope.toWalkthrough = function(title) {
-  };
+  $scope.fromSavedOrSearch = $stateParams.fromSavedOrSearch;
+  var payload;
+  if($scope.fromSavedOrSearch == "saved") {
+    payload = RecipeService.getRecipeFromSaved($scope.recipeId);
+  } else if($scope.fromSavedOrSearch == "search") {
+    payload = RecipeService.getSearchPayload()[$scope.recipeId];
+  }
+  $scope.single = payload;
+  $scope.instructions = payload.instructions;
 
 })
 
+
+// Controller for recipe instruction walkthrough
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
+
   $scope.recipeId = $stateParams.recipeId;
   if($stateParams.fromSavedOrSearch == "saved") {
-    $scope.recipe = RecipeService.get($stateParams.recipeId);
+    $scope.recipe = RecipeService.getRecipeFromSaved($stateParams.recipeId);
   } else if($stateParams.fromSavedOrSearch == "search") {
     var searchPayload = RecipeService.getSearchPayload();
     $scope.recipe = searchPayload[$scope.recipeId];
@@ -68,47 +87,34 @@ angular.module('SpoonFeedMe.controllers', [])
 
   }
 
-  $scope.goBack = function() {
-    $ionicHistory.goBack();
-  }
-
   $scope.$on("$ionicView.beforeEnter", function() {
-    alert("Starting voice recognition...");
+
     $scope.recognition.onresult = function(event) {
-    if (event.results.length > 0) {
-      var heardValue = event.results[0][0].transcript;
-      if(heardValue == "next") {
-        // alert("I heard next...");
-        $scope.nextStep();
-        $scope.$apply();
-      } else if(heardValue == "back") {
-        // alert("I heard back...");
-        $scope.prevStep();
-        $scope.$apply();
+      if (event.results.length > 0) {
+        var heardValue = event.results[0][0].transcript;
+        if(heardValue == "next") {
+          // alert("I heard next...");
+          $scope.nextStep();
+          $scope.$apply();
+        } else if(heardValue == "back") {
+          // alert("I heard back...");
+          $scope.prevStep();
+          $scope.$apply();
+        } else if(heardValue == "read") {
+          // Call to text to speech plugin
+        }
       }
     }
-    }
+    alert("Starting voice recognition...");
     $scope.recognition.start();
+
   });
 
   $scope.$on("$ionicView.beforeLeave", function() {
+
     alert("Stopping voice recognition...");
     $scope.recognition.abort();
+
   });
 
-})
-
-.controller('SearchDetailCtrl', function($scope, $stateParams, RecipeService) {
-  $scope.recipeId = $stateParams.recipeId;
-  var searchPayload = RecipeService.getSearchPayload();
-  $scope.single = searchPayload[$stateParams.recipeId];
-  $scope.instructions = searchPayload[$stateParams.recipeId].instructions;
-  $scope.fromSavedOrSearch = "search";
-})
-
-.controller('VoiceCtrl', function($scope, $stateParams) {
-  ionic.Platform.ready(function(){
-    // alert("Creating speech recognition handler...");
-    $scope.recognition = new SpeechRecognition();
-  });
 })
