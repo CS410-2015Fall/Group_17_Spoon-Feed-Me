@@ -11,13 +11,10 @@ angular.module('SpoonFeedMe.controllers', [])
 
     RecipeService.getFromSearch(searchTerms).then(function (recipeData) {
       $scope.content = recipeData;
-      $ionicLoading.hide()
-  })};
-    
-
       $ionicLoading.hide();
     });
-
+  }
+})
 
 .controller('SavedCtrl', function($scope, RecipeService) {
   // With the new view caching in Ionic, Controllers are only called
@@ -73,22 +70,6 @@ angular.module('SpoonFeedMe.controllers', [])
 
   $scope.goBack = function() {
     $ionicHistory.goBack();
-  }
-
-
-  $scope.voice = function(){
-      
-     var text = $scope.currentStep;
-TTS
-    .speak({
-        text: text,
-        locale: 'en-GB',
-        rate: 1
-    }, function () {
-        alert('success');
-    }, function (reason) {
-        alert(reason);
-    });
   }
 
   $scope.$on("$ionicView.beforeEnter", function() {
