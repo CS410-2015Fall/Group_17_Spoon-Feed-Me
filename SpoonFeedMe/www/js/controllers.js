@@ -17,8 +17,7 @@ angular.module('SpoonFeedMe.controllers', [])
 
       $ionicLoading.hide();
     });
-  }
-})
+
 
 .controller('SavedCtrl', function($scope, RecipeService) {
   // With the new view caching in Ionic, Controllers are only called
