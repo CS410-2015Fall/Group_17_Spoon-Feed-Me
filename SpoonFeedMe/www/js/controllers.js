@@ -1,4 +1,4 @@
-angular.module('SpoonFeedMe.controllers', [])
+angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
 
 // Controller for SpeechRecognition object creation
@@ -27,13 +27,18 @@ angular.module('SpoonFeedMe.controllers', [])
       $ionicLoading.hide();
     });
   }
+
+  $scope.saveRecipe = function(recipe) {
+    RecipeService.saveRecipe(recipe);
+  }
 })
 
 
 // Contoller for saved recipes
 .controller('SavedCtrl', function($scope, RecipeService) {
-
-  $scope.saved = RecipeService.allRecipesFromSaved();
+  $scope.$on("$ionicView.beforeEnter", function() {
+    $scope.saved = RecipeService.allRecipesFromSaved();
+  });
   $scope.remove = function(recipe) {
     RecipeService.removeRecipeFromSaved(recipe);
   };
