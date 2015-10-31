@@ -14,15 +14,12 @@ angular.module('SpoonFeedMe.services', [])
   };
 })
 
-.factory('RecipeService', function(SearchService, $http) {
-  // Might use a resource here that returns a JSON array
-
-  // Calling saved data from phone? Or calling server to get reipes
-  // Some fake testing data
+.factory('StorageService', function($http) {
+  // Fake Local Storage JSON Array
   var savedRecipes = [{
     name: 'Chocolate-Covered OREO Cookie Cake',
     summary: 'Best Ice Cream Sandwich Recipe',
-    image: 'http://images.sweetauthoring.com/recipe/133036_977.jpg',
+    imgUrl: 'http://images.sweetauthoring.com/recipe/133036_977.jpg',
     ingredients: [
         "1 (18.25 ounce) package devil's food chocolate cake mix",
         "4 (1 ounce) squares BAKER'S Semi-Sweet Chocolate",
@@ -41,7 +38,7 @@ angular.module('SpoonFeedMe.services', [])
   }, {
     name: 'Coconut Poke Cake',
     summary: 'Best Coconut Poke Cake Recipe',
-    image: 'http://images.media-allrecipes.com/userphotos/250x250/334118.jpg',
+    imgUrl: 'http://images.media-allrecipes.com/userphotos/250x250/334118.jpg',
     ingredients: [
         "1 (18.25 ounce) package white cake mix",
         "1 (14 ounce) can cream of coconut",
@@ -55,6 +52,21 @@ angular.module('SpoonFeedMe.services', [])
     ]
   }];
 
+  return {
+    allSavedRecipes: function() {
+      return savedRecipes;
+    },
+    removeSavedRecipe: function(recipe) {
+      savedRecipes.splice(savedRecipes.indexOf(recipe), 1);
+    },
+    getSingleRecipe: function(recipeId) {
+      return savedRecipes[parseInt(recipeId)];
+    }
+  }
+})
+
+.factory('RecipeService', function(SearchService, StorageService, $http) {
+
   var searchPayload;
 
   return {
@@ -64,17 +76,21 @@ angular.module('SpoonFeedMe.services', [])
         return searchPayload;
       });
     },
-    all: function() {
-      return savedRecipes;
-    },
-    remove: function(recipe) {
-      savedRecipes.splice(savedRecipes.indexOf(recipe), 1);
-    },
-    get: function(recipeId) {
-      return savedRecipes[parseInt(recipeId)];
-    },
+
     getSearchPayload: function() {
       return searchPayload;
+    },
+
+    allRecipesFromSaved: function() {
+      return StorageService.allSavedRecipes();
+    },
+
+    removeRecipeFromSaved: function(recipe) {
+      StorageService.removeSavedRecipe(recipe);
+    },
+
+    getRecipeFromSaved: function(recipeId) {
+      return StorageService.getSingleRecipe(recipeId);
     }
   };
 });
