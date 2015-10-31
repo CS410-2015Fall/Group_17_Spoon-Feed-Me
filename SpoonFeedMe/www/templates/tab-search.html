@@ -12,10 +12,7 @@
         <img ng-src="{{recipe.imgUrl}}">
         <h2>{{recipe.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
-        <ion-option-button class="button-assertive" ng-click="remove(recipe)">
-          Delete
-        </ion-option-button>
-        <ion-option-button class="button-balanced" ng-click="">
+        <ion-option-button class="button-balanced" ng-click="saveRecipe(recipe)">
           Save
         </ion-option-button>
       </ion-item>
