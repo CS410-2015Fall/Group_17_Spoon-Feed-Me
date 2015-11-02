@@ -83,6 +83,21 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   }
 
+    $scope.voice = function(){
+      
+     var text = $scope.currentStep;
+TTS
+    .speak({
+        text: text,
+        locale: 'en-GB',
+        rate: 1
+    }, function () {
+        alert('success');
+    }, function (reason) {
+        alert(reason);
+    });
+  }
+
   $scope.$on("$ionicView.beforeEnter", function() {
 
     $scope.recognition.onresult = function(event) {
@@ -98,6 +113,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
           $scope.$apply();
         } else if(heardValue == "read") {
           // Call to text to speech plugin
+          $scope.voice();
         }
       }
     }
