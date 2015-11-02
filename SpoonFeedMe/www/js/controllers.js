@@ -62,7 +62,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
 
   $scope.recipeId = $stateParams.recipeId;
-  var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+  var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[$scope.recipeId];
   $scope.recipe = payload;
 
   $scope.currentStepNum = 1;
