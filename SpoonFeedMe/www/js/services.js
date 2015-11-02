@@ -56,8 +56,11 @@ angular.module('SpoonFeedMe.services', [])
       });
     },
 
-    getSearchPayload: function() {
-      return searchPayload;
+    getRecipes: function(savedOrSearch) {
+      if(savedOrSearch=='search') {
+        return searchPayload;
+      }
+      else return StorageService.allSavedRecipes();
     },
 
     allRecipesFromSaved: function() {

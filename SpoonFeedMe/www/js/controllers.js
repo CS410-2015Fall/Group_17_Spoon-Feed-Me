@@ -51,12 +51,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   $scope.recipeId = $stateParams.recipeId;
   $scope.fromSavedOrSearch = $stateParams.fromSavedOrSearch;
-  var payload;
-  if($scope.fromSavedOrSearch == "saved") {
-    payload = RecipeService.getRecipeFromSaved($scope.recipeId);
-  } else if($scope.fromSavedOrSearch == "search") {
-    payload = RecipeService.getSearchPayload()[$scope.recipeId];
-  }
+  var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
   $scope.single = payload;
   $scope.instructions = payload.instructions;
 
