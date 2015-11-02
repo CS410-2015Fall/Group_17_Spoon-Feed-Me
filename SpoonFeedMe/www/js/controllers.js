@@ -92,13 +92,29 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   }
 
+  $scope.voice = function() {
+  alert("inside voice");
+  var text = $scope.currentStep;
+TTS
+    .speak({
+        text: text,
+        locale: 'en-GB',
+        rate: 1
+    }, function () {
+        alert('success');
+    }, function (reason) {
+        alert(reason);
+    });
+  }
+
+
   $scope.$on("$ionicView.beforeEnter", function() {
 
     $scope.recognition.onresult = function(event) {
       if (event.results.length > 0) {
         var heardValue = event.results[0][0].transcript;
         if(heardValue == "next") {
-          // alert("I heard next...");
+          alert("I heard next...");
           $scope.nextStep();
           $scope.$apply();
         } else if(heardValue == "back") {
@@ -107,6 +123,8 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
           $scope.$apply();
         } else if(heardValue == "read") {
           // Call to text to speech plugin
+          $scope.voice();
+
         }
       }
     }
