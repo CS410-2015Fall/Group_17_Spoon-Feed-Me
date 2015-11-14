@@ -23,8 +23,9 @@ def get_recipe(urls):
 				path = '/html/body/div[1]/div[2]/div/div/section/section[3]/div/div/ol[1]/li/span/text()'
 				steps = tree.xpath(path)
 
-				name = url[0]
-				all_recipes[name] = steps
+				if len(steps) > 0:
+					name = url[0]
+					all_recipes[name] = steps
 
 			except requests.exceptions.Timeout:
 				logging.warning("TIMEOUT!!!!!!!!")

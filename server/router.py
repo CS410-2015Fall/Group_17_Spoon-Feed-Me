@@ -2,6 +2,7 @@ from flask import Flask, make_response
 from json import dumps
 import search_yummly
 import get_recipe
+import get_picture
 
 import logging
 
@@ -16,26 +17,22 @@ def get_recipes(search_params):
 	# [(recipe_name, url, ingredients, imgUrl, time, servings), ...]
 	steps = get_recipe.get_recipe(urls)
 
-	# logging.warning(urls)
-	# logging.warning(steps)
-
-	# print urls
-	# print steps
-
 	all_recipes = []
 	for url in urls:
 		name = url[0]
 		if name in steps:
 			recipe = {}
+			ingredients_and_pictures = get_picture.picture(url[2])
 			recipe['name'] = name
 			recipe['url'] = url[1]
-			recipe['ingredients'] = url[2]
+			recipe['ingredients'] = ingredients_and_pictures
 			recipe['instructions'] = steps[name]
 			recipe['imgUrl'] = url[3]
 			recipe['time'] = url[4]
 			recipe['servings'] = url[5]
 
-			all_recipes.append(recipe)
+			if steps[name]:
+				all_recipes.append(recipe)
 
 	return make_response(dumps(all_recipes))
 
