@@ -1,7 +1,8 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, jsonify
 from json import dumps
 import search_yummly
 import get_recipe
+import get_picture
 
 import logging
 
@@ -16,12 +17,6 @@ def get_recipes(search_params):
 	# [(recipe_name, url, ingredients, imgUrl, time, servings), ...]
 	steps = get_recipe.get_recipe(urls)
 
-	# logging.warning(urls)
-	# logging.warning(steps)
-
-	# print urls
-	# print steps
-
 	all_recipes = []
 	for url in urls:
 		name = url[0]
@@ -35,9 +30,17 @@ def get_recipes(search_params):
 			recipe['time'] = url[4]
 			recipe['servings'] = url[5]
 
-			all_recipes.append(recipe)
+			if steps[name]:
+				all_recipes.append(recipe)
 
 	return make_response(dumps(all_recipes))
+
+@app.route('/images/<ingredients>')
+def return_pictures(ingredients):
+	ingr_list = ingredients.split(',')
+	images = get_picture.picture(ingr_list)
+	return jsonify(**images)
+
 
 
 if __name__ == '__main__':
