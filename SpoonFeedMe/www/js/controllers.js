@@ -113,6 +113,7 @@ TTS
           $scope.$apply();
         } else if(heardValue == "read") {
           // Call to text to speech plugin
+          $scope.voice();
         }
       }
     }
