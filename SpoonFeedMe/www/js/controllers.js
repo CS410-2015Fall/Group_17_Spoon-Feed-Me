@@ -93,9 +93,13 @@ TTS
         rate: 1
     }, function () {
         alert('success');
+        alert("Starting voice recognition...");
+        $scope.recognition.start();
     }, function (reason) {
         alert(reason);
     });
+
+    
   }
 
   $scope.$on("$ionicView.beforeEnter", function() {
@@ -113,7 +117,12 @@ TTS
           $scope.$apply();
         } else if(heardValue == "read") {
           // Call to text to speech plugin
+          
+          alert("Stopping voice recognition...");
+          $scope.recognition.stop();
+
           $scope.voice();
+
         }
       }
     }
