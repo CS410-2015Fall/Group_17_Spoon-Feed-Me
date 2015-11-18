@@ -123,7 +123,11 @@ TTS
           $scope.$apply();
         } else if(heardValue == "read") {
           // Call to text to speech plugin
+          alert(" heard read");
+          $scope.recognition.mAudioManager.adjustStreamVolume(STREAM_MUSIC, ADJUST_RAISE, 0);
+          alert("was ok");
           $scope.voice();
+          alert("read it");
 
         }
       }
