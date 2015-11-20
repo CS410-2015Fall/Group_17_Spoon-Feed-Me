@@ -37,7 +37,7 @@ def get_recipes(search_params):
 
 @app.route('/images/<ingredients>')
 def return_pictures(ingredients):
-	ingr_list = ingredients.split(',')
+	ingr_list = ingredients.split('",')
 	images = get_picture.picture(ingr_list)
 	return jsonify(**images)
 

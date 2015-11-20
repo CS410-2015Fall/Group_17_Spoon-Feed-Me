@@ -4,6 +4,7 @@ import json
 
 import mock_yummly
 import mock_recipe
+import get_picture
 
 class TestServer(unittest.TestCase):
 
@@ -48,6 +49,21 @@ class TestServer(unittest.TestCase):
 		self.assertEqual('Set oven to broil.', instructions[0])
 		self.assertEqual('Spread butter on one side of each slice of bread. Place apple slices on buttered side of bread. Sprinkle cinnamon on top. Place bread on a baking sheet.', instructions[1])
 		self.assertEqual('Place in a preheated oven until toasted, about 2 minutes.', instructions[2])
+
+	def test_sanitize_input(self):
+		ingredients = '"1/2 cup orange juice", "1/2 lime, juiced", "1 tablespoon honey", "1 teaspoon crushed red pepper flakes", "4 (6 ounce) skinless, boneless chicken breast halves", "1 tablespoon chopped fresh cilantro"'
+		ingr_list = ingredients.split('", ')
+		self.assertEqual(6, len(ingr_list))
+
+		ingr_1 = get_picture.sanitize_input(ingr_list[0])
+		self.assertEqual("12 cup orange juice", ingr_1)
+
+		ingr_2 = get_picture.sanitize_input(ingr_list[1])
+		self.assertEqual("12 lime, juiced", ingr_2)
+
+		ingr_3 = get_picture.sanitize_input(ingr_list[4])
+		self.assertEqual("4 (6 ounce) skinless, boneless chicken breast halves", ingr_3)
+
 
 if __name__ == '__main__':
     unittest.main()

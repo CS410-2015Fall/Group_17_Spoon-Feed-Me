@@ -9,10 +9,11 @@ def picture(ingredients):
 	ua = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:32.0) Gecko/20100101 Firefox/32.0'
 	headers = {'User-Agent': ua, 'Accept': '*/*'}
 
+	extra_stuff = '&tbm=isch'
 	all_imgs = {}
 	for ingredient in ingredients:
-		extra_stuff = '&tbm=isch'
-		query = 'https://www.google.ca/search?q=' + ingredient + extra_stuff
+		formatted_ingr = sanitize_input(ingredient)
+		query = 'https://www.google.ca/search?q=' + formatted_ingr + extra_stuff
 
 		try:
 			page = requests.get(query, headers=headers, timeout=2)
@@ -34,3 +35,16 @@ def picture(ingredients):
 				logging.warning("CONNECTIONERROR GETTING PICTURE")
 
 	return all_imgs
+
+def sanitize_input(ingredient):
+	if '/' in ingredient:
+		formatted_ingr = ingredient.replace('/', '')
+		formatted_ingr = formatted_ingr.replace('"', '')
+		return formatted_ingr
+
+	elif '"' in ingredient:
+		formatted_ingr = ingredient.replace('"', '')
+		return formatted_ingr
+
+	else:
+		return ingredient
