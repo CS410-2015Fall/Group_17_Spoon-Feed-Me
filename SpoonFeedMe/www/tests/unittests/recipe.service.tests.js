@@ -1,7 +1,10 @@
 describe('RecipeService', function() {
 
-	// Constants
-	var searchResults = [{
+	// Values used for testing
+	var recipeService;
+	var searchServiceMock = {};
+	var searchTerms = 'SearchTerm';
+	var searchPayload = [{
 		name: 'Chocolate-Covered OREO Cookie Cake',
 		summary: 'Best Ice Cream Sandwich Recipe',
 		image: 'http://images.sweetauthoring.com/recipe/133036_977.jpg',
@@ -15,39 +18,29 @@ describe('RecipeService', function() {
 		    "12 OREO Cookies, coarsely crushed"
 	]}];
 
-	var searchTerms = 'SearchTerm';
-
-	var recipeService,deferredSearchResults;
-	var searchServiceMock = {};
-
 	//Load the app module
 	beforeEach(module('SpoonFeedMe'));
 
-	// disable template caching
+	// disable template caching, mock services
 	beforeEach(module(function($provide, $urlRouterProvider) {  
 	    $provide.value('$ionicTemplateCache', function(){} );
+	    $provide.value('SearchService', searchServiceMock)
 	    $urlRouterProvider.deferIntercept();
 	}));
 
-	// Mock the SearchService
-	beforeEach(module(function($provide) {
-		$provide.value('SearchService', searchServiceMock);
-	}));
-
-	beforeEach(inject(function(_RecipeService_, $q) {  
-
-		recipeService = _RecipeService_;
-		deferredSearchResults = $q.defer();
-
-		// Initialize search spy
-		searchServiceMock.search = jasmine.createSpy().and.returnValue(deferredSearchResults.promise);
-	
+	// Inject RecipeService
+	beforeEach(inject(function(_RecipeService_) {  
+		recipeService = _RecipeService_;	
 	}));
 
 	describe('#getRecipesFromSearch', function() {
 
-		// Todo: Call getAll from the service
-		beforeEach(inject(function(_$rootScope_) {
+		var deferredSearchResults;
+
+		beforeEach(inject(function(_$rootScope_, $q) {
+			deferredSearchResults = $q.defer();
+			searchServiceMock.search = jasmine.createSpy().and.returnValue(deferredSearchResults.promise);
+
 			$rootScope = _$rootScope_;
 			result = recipeService.getFromSearch(searchTerms);
 		}));
@@ -59,9 +52,9 @@ describe('RecipeService', function() {
 		describe('when the search is executed', function() {
 			it('if successful, should return search payload', function() {
 				deferredSearchResults.promise.then(function(results) {
-					expect(results).toBe(searchResults);
+					expect(results).toBe(searchPayload);
 				});
-				deferredSearchResults.resolve(searchResults);
+				deferredSearchResults.resolve(searchPayload);
 				$rootScope.$digest();
 			});
 		});
