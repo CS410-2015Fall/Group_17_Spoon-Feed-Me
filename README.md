@@ -16,3 +16,13 @@ In order to run the app locally in your dev environment, you may need to install
 * Text to speech: ```cordova plugin add cordova-plugin-tts```
 * Whitelist: ```cordova plugin add cordova-plugin-whitelist```
 * Voice Recognition ```cordova plugin add https://github.com/milestester/SpeechRecognitionPlugin```
+
+## Running Unit Tests </br>
+
+Follow these steps to run the unittest suite in your dev environment: 
+
+1. Navigate to root SpoonFeedMe ionic project folder
+2. Run the following command: ```bower install```</br>
+*Note: I got a 'permission denied' error when I tried running the above. In case this happens to you, run the install as root:* ```sudo bower install --allow-root```
+3. Navigate to SpoonFeedMe/www/tests
+4. Run ```karma start unittests.conf.js```
