@@ -33,7 +33,8 @@ describe('RecipeService', function() {
 		recipeService = _RecipeService_;	
 	}));
 
-	describe('#getRecipesFromSearch', function() {
+    // Test RecipeService.getFromSearch
+	describe('#getFromSearch', function() {
 
 		var deferredSearchResults;
 
@@ -45,18 +46,20 @@ describe('RecipeService', function() {
 			result = recipeService.getFromSearch(searchTerms);
 		}));
 
+		// expect that RecipeService.getFromSearch calls SearchService.search
 		it("should call search on searchService", function() {
 			expect(searchServiceMock.search).toHaveBeenCalledWith(searchTerms);
 		});
 
-		describe('when the search is executed', function() {
-			it('if successful, should return search payload', function() {
-				deferredSearchResults.promise.then(function(results) {
-					expect(results).toBe(searchPayload);
-				});
-				deferredSearchResults.resolve(searchPayload);
-				$rootScope.$digest();
+		// expects that the value saved to RecipeService's searchPayload
+		// variable matches the results that the SearchService returned
+		it('if successful, should set searchPayload to results', function() {
+			deferredSearchResults.promise.then(function(results) {
+				expect(recipeService.getRecipes('search')).toBe(searchPayload);
 			});
+			deferredSearchResults.resolve(searchPayload);
+			$rootScope.$digest();
+		
 		});
 	});
 });
