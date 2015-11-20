@@ -26,3 +26,6 @@ Follow these steps to run the unittest suite in your dev environment:
 *Note: I got a 'permission denied' error when I tried running the above. In case this happens to you, run the install as root:* ```sudo bower install --allow-root```
 3. Navigate to SpoonFeedMe/www/tests
 4. Run ```karma start unittests.conf.js```
+
+## Adding New Unit Tests </br>
+As long as a unit test lives in the SpoonFeedMe/www/tests/unittests directory, it will run when you manually run the unit tests (see Running Unit Tests above) and in Travis. 
