@@ -23,7 +23,8 @@ Follow these steps to run the unittest suite in your dev environment:
 
 1. Navigate to root SpoonFeedMe ionic project folder
 2. Run the following command: ```bower install```</br>
-*Note: I got a 'permission denied' error when I tried running the above. In case this happens to you, run the install as root:* ```sudo bower install --allow-root```
+*Note: I got a 'permission denied' error when I tried running the above. In case this happens to you, run the install as root:* ```sudo bower install --allow-root```</br>
+*Note 2: If you need to install bower, see:* http://bower.io/
 3. Navigate to SpoonFeedMe/www/tests
 4. Run ```karma start unittests.conf.js```
 
