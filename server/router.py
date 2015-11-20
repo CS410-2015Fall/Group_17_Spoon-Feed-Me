@@ -1,4 +1,5 @@
 from flask import Flask, make_response, jsonify
+from flask.ext.cors import CORS
 from json import dumps
 import search_yummly
 import get_recipe
@@ -9,6 +10,7 @@ import logging
 logging.basicConfig(filename='debug_logs.log', level=logging.WARNING)
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/<search_params>')
 def get_recipes(search_params):
