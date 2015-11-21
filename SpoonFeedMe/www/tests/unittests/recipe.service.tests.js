@@ -1,13 +1,11 @@
 describe('RecipeService', function() {
 
-	// Values used for testing
 	var recipeService;
-	var searchTerms = 'SearchTerm';
-
-	// Mocks
 	var searchServiceMock = {};
 	var storageServiceMock = {};
 
+	// Dummy values used for searching
+	var searchTerms = 'SearchTerm';
 	var searchPayload = [{
 		name: 'Chocolate-Covered OREO Cookie Cake',
 		summary: 'Best Ice Cream Sandwich Recipe',
@@ -41,16 +39,16 @@ describe('RecipeService', function() {
 	/*
      * Test RecipeService.allRecipesFromSaved
      */
-
-     describe('#allRecipesFromSaved', function() {
-     	beforeEach(inject(function() {
-     		storageServiceMock.allSavedRecipes = jasmine.createSpy();
-     		recipeService.allRecipesFromSaved();
-     	}));
-
-     	// Expect that it will call StorageService.allSavedRecipes
-     	it("should call allRecipesFromSaved on StorageService", function() {
-     		expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+     describe('testAllRecipesFromSaved', function() {
+     	describe('When I call RecipeService.allRecipesFromSaved', function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.allSavedRecipes = jasmine.createSpy();
+     	 		recipeService.allRecipesFromSaved();
+     		}));
+	     	// Expect that it will call StorageService.allSavedRecipes
+	     	it("should call allRecipesFromSaved on StorageService", function() {
+	     		expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+	     	});
      	});
      });
 
@@ -85,4 +83,30 @@ describe('RecipeService', function() {
 		
 		});
 	});
+
+	/*
+     * Test RecipeService.getFromSearch
+     */ 
+     describe('getRecipesTest', function() {
+     	
+     	describe("when I call RecipeService.getRecipes with 'search'", function() {
+     		it('returns its search payload', function() {
+     			// Set search payload
+				recipeService.setSearchPayload(searchPayload);
+				// Check that it returns the same value
+				expect(recipeService.getRecipes('search')).toEqual(searchPayload);
+     		});
+     	});
+
+     	describe("when I call RecipeService.getRecipes with 'saved'", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.allSavedRecipes = jasmine.createSpy();
+     	 		recipeService.getRecipes('saved');
+     		}));
+     		
+     		it('calls StorageService.allSavedRecipes()', function() {
+     			expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+     		});
+     	});
+     });
 });
