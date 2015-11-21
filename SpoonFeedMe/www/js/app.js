@@ -20,7 +20,12 @@ angular.module('SpoonFeedMe', ['ionic', 'SpoonFeedMe.controllers', 'SpoonFeedMe.
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+  $ionicConfigProvider.backButton.text('Go Back').icon('ion-android-arrow-back');
+  $ionicConfigProvider.views.transition("android");
+  $ionicConfigProvider.backButton.text("");
+  $ionicConfigProvider.navBar.alignTitle("android");
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
