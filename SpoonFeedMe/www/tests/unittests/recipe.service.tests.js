@@ -2,8 +2,12 @@ describe('RecipeService', function() {
 
 	// Values used for testing
 	var recipeService;
-	var searchServiceMock = {};
 	var searchTerms = 'SearchTerm';
+
+	// Mocks
+	var searchServiceMock = {};
+	var storageServiceMock = {};
+
 	var searchPayload = [{
 		name: 'Chocolate-Covered OREO Cookie Cake',
 		summary: 'Best Ice Cream Sandwich Recipe',
@@ -24,7 +28,8 @@ describe('RecipeService', function() {
 	// disable template caching, mock services
 	beforeEach(module(function($provide, $urlRouterProvider) {  
 	    $provide.value('$ionicTemplateCache', function(){} );
-	    $provide.value('SearchService', searchServiceMock)
+	    $provide.value('SearchService', searchServiceMock);
+	    $provide.value('StorageService', storageServiceMock);
 	    $urlRouterProvider.deferIntercept();
 	}));
 
@@ -33,7 +38,25 @@ describe('RecipeService', function() {
 		recipeService = _RecipeService_;	
 	}));
 
-    // Test RecipeService.getFromSearch
+	/*
+     * Test RecipeService.allRecipesFromSaved
+     */
+
+     describe('#allRecipesFromSaved', function() {
+     	beforeEach(inject(function() {
+     		storageServiceMock.allSavedRecipes = jasmine.createSpy();
+     		recipeService.allRecipesFromSaved();
+     	}));
+
+     	// Expect that it will call StorageService.allSavedRecipes
+     	it("should call allRecipesFromSaved on StorageService", function() {
+     		expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+     	});
+     });
+
+    /*
+     * Test RecipeService.getFromSearch
+     */ 
 	describe('#getFromSearch', function() {
 
 		var deferredSearchResults;
