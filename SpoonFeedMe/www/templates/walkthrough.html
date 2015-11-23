@@ -2,7 +2,9 @@
 	<ion-content class="padding">
   		<h3> Step {{currentStepNum}}/{{maxStepNum}} </h3>
   		<p> {{currentStep}}</p>
-  		<button class="button" ng-show="currentStepNum > 1" ng-click="prevStep()">Prev Step</button>
-  		<button class="button" ng-show="currentStepNum < maxStepNum" ng-click="nextStep()">Next Step</button>
+        <div class="row">
+  		    <button class="col-50 button android-btn" ng-show="currentStepNum > 1" ng-click="prevStep()">Prev Step</button>
+  		    <button class="col-50 button android-btn" ng-show="currentStepNum < maxStepNum" ng-click="nextStep()">Next Step</button>
+        </div>
   	</ion-content>
 </ion-nav-view>
