@@ -1,7 +1,12 @@
 describe('RecipeService', function() {
 
-	// Constants
-	var searchResults = [{
+	var recipeService;
+	var searchServiceMock = {};
+	var storageServiceMock = {};
+
+	// Dummy values used for searching
+	var searchTerms = 'SearchTerm';
+	var searchPayload = [{
 		name: 'Chocolate-Covered OREO Cookie Cake',
 		summary: 'Best Ice Cream Sandwich Recipe',
 		image: 'http://images.sweetauthoring.com/recipe/133036_977.jpg',
@@ -15,55 +20,93 @@ describe('RecipeService', function() {
 		    "12 OREO Cookies, coarsely crushed"
 	]}];
 
-	var searchTerms = 'SearchTerm';
-
-	var recipeService,deferredSearchResults;
-	var searchServiceMock = {};
-
 	//Load the app module
 	beforeEach(module('SpoonFeedMe'));
 
-	// disable template caching
+	// disable template caching, mock services
 	beforeEach(module(function($provide, $urlRouterProvider) {  
 	    $provide.value('$ionicTemplateCache', function(){} );
+	    $provide.value('SearchService', searchServiceMock);
+	    $provide.value('StorageService', storageServiceMock);
 	    $urlRouterProvider.deferIntercept();
 	}));
 
-	// Mock the SearchService
-	beforeEach(module(function($provide) {
-		$provide.value('SearchService', searchServiceMock);
+	// Inject RecipeService
+	beforeEach(inject(function(_RecipeService_) {  
+		recipeService = _RecipeService_;	
 	}));
 
-	beforeEach(inject(function(_RecipeService_, $q) {  
+	/*
+     * Test RecipeService.allRecipesFromSaved
+     */
+     describe('testAllRecipesFromSaved', function() {
+     	describe('When I call RecipeService.allRecipesFromSaved', function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.allSavedRecipes = jasmine.createSpy();
+     	 		recipeService.allRecipesFromSaved();
+     		}));
+	     	// Expect that it will call StorageService.allSavedRecipes
+	     	it("should call allRecipesFromSaved on StorageService", function() {
+	     		expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+	     	});
+     	});
+     });
 
-		recipeService = _RecipeService_;
-		deferredSearchResults = $q.defer();
+    /*
+     * Test RecipeService.getFromSearch
+     */ 
+	describe('#getFromSearch', function() {
 
-		// Initialize search spy
-		searchServiceMock.search = jasmine.createSpy().and.returnValue(deferredSearchResults.promise);
-	
-	}));
+		var deferredSearchResults;
 
-	describe('#getRecipesFromSearch', function() {
+		beforeEach(inject(function(_$rootScope_, $q) {
+			deferredSearchResults = $q.defer();
+			searchServiceMock.search = jasmine.createSpy().and.returnValue(deferredSearchResults.promise);
 
-		// Todo: Call getAll from the service
-		beforeEach(inject(function(_$rootScope_) {
 			$rootScope = _$rootScope_;
 			result = recipeService.getFromSearch(searchTerms);
 		}));
 
+		// expect that RecipeService.getFromSearch calls SearchService.search
 		it("should call search on searchService", function() {
 			expect(searchServiceMock.search).toHaveBeenCalledWith(searchTerms);
 		});
 
-		describe('when the search is executed', function() {
-			it('if successful, should return search payload', function() {
-				deferredSearchResults.promise.then(function(results) {
-					expect(results).toBe(searchResults);
-				});
-				deferredSearchResults.resolve(searchResults);
-				$rootScope.$digest();
+		// expects that the value saved to RecipeService's searchPayload
+		// variable matches the results that the SearchService returned
+		it('if successful, should set searchPayload to results', function() {
+			deferredSearchResults.promise.then(function(results) {
+				expect(recipeService.getRecipes('search')).toBe(searchPayload);
 			});
+			deferredSearchResults.resolve(searchPayload);
+			$rootScope.$digest();
+		
 		});
 	});
+
+	/*
+     * Test RecipeService.getFromSearch
+     */ 
+     describe('getRecipesTest', function() {
+     	
+     	describe("when I call RecipeService.getRecipes with 'search'", function() {
+     		it('returns its search payload', function() {
+     			// Set search payload
+				recipeService.setSearchPayload(searchPayload);
+				// Check that it returns the same value
+				expect(recipeService.getRecipes('search')).toEqual(searchPayload);
+     		});
+     	});
+
+     	describe("when I call RecipeService.getRecipes with 'saved'", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.allSavedRecipes = jasmine.createSpy();
+     	 		recipeService.getRecipes('saved');
+     		}));
+     		
+     		it('calls StorageService.allSavedRecipes()', function() {
+     			expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
+     		});
+     	});
+     });
 });
