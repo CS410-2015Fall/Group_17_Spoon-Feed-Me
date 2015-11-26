@@ -112,7 +112,7 @@ window.TTS.speak({
           // alert("I heard next...");
           $scope.nextStep();
           $scope.$apply();
-        } else if(heardValue == "back") {
+        } else if((heardValue == "back") || (heardValue == "previous")) {
           // alert("I heard back...");
           $scope.prevStep();
           $scope.$apply();
