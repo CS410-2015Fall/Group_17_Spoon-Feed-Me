@@ -9,7 +9,7 @@
     </div>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in content" type="item-text-wrap" href="#/tab/search/{{$index}}/search">
-        <img ng-src="{{recipe.imgUrl}}">
+        <img ng-src="{{recipe.imgUrl}}"></img>
         <h2>{{recipe.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
         <ion-option-button class="button-balanced" ng-click="saveRecipe(recipe)">

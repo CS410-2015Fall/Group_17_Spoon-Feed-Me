@@ -52,6 +52,8 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   $scope.recipeId = $stateParams.recipeId;
   $scope.fromSavedOrSearch = $stateParams.fromSavedOrSearch;
   var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+  var images = RecipeService.getImages(payload.ingredients);
+  console.log(payload.ingredients);
   $scope.single = payload;
   $scope.instructions = payload.instructions;
   $scope.ingredients = payload.ingredients; 

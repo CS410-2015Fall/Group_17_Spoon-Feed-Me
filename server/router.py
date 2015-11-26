@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, request
 from flask.ext.cors import CORS
 from json import dumps
 import search_yummly
@@ -37,11 +37,12 @@ def get_recipes(search_params):
 
 	return make_response(dumps(all_recipes))
 
-@app.route('/images/<ingredients>')
-def return_pictures(ingredients):
-	ingr_list = ingredients.split(',')
+@app.route('/images')
+def return_pictures():
+	ingr_list = request.args
+	logging.warning(ingr_list)
 	images = get_picture.picture(ingr_list)
-	return jsonify(**images)
+	return make_response(dumps(images))
 
 
 
