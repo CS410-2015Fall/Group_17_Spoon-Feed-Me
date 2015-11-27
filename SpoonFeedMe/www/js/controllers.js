@@ -60,7 +60,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
 
 // Controller for recipe instruction walkthrough
-.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
+.controller('WalkthroughCtrl', function($scope, $stateParams, RecipeService) {
 
 
 
@@ -75,16 +75,18 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   $scope.nextStep = function() {
 
-    $scope.currentStepNum+=1;
-    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
-
+    if($scope.currentStepNum < $scope.maxStepNum) {
+      $scope.currentStepNum+=1;
+      $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+    }
   }
 
   $scope.prevStep = function() {
 
-    $scope.currentStepNum-=1;
-    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
-
+    if($scope.currentStepNum > 1) {
+      $scope.currentStepNum-=1;
+      $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+    }
   }
 
 $scope.rate = 0.8;
