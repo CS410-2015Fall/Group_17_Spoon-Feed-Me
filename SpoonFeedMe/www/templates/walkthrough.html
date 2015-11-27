@@ -1,8 +1,14 @@
 <ion-nav-view view-title="{{recipe.name}}">
 	<ion-content class="padding">
-  		<h3> Step {{currentStepNum}}/{{maxStepNum}} </h3>
+  		<h3> Step {{currentStepNum}}/{{maxStepNum}}</h3>
   		<p> {{currentStep}}</p>
  
+          <button class="col-50 button android-btn" ng-click="changeLow()">Slower</button>
+          <button class="col-50 button android-btn" ng-click="changeHigh()">Faster</button>
+          <button class="col-50 button android-btn" ng-click="help()">Help</button>
+
+
+
 	</ion-content>
 
     <!-- align to the bottom of the page -->
@@ -14,13 +20,13 @@
         </div>
 
 
-      
-
+   
       <div id="page-wrapper">
       	<p class="styled">
-      		<meter min="0" max="100" low="25" high="75" optimum="100" value="50"></meter>
+      		<meter id="progress" max="100" low="25" high="75" optimum="100" value="25"></meter>
       	</p>
-      </div>
+      </div>   
+
 
 
 
