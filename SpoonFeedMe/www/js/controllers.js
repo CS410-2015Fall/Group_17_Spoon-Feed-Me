@@ -90,11 +90,12 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 $scope.rate = 0.8;
 
     $scope.changeLow = function(){
-      // alert('ouch');
+       alert('Slowing down!');
       $scope.rate = 0.5;
     }
 
     $scope.changeHigh = function(){
+      alert('Speeding up!');
       $scope.rate = 1.2;
     }
 
