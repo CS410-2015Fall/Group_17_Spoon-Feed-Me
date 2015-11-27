@@ -3,9 +3,7 @@
   		<h3> Step {{currentStepNum}}/{{maxStepNum}} </h3>
   		<p> {{currentStep}}</p>
  
-
-
-  	</ion-content>
+	</ion-content>
 
     <!-- align to the bottom of the page -->
     <div style="position: absolute; bottom: 0px; width: 100%">
@@ -16,9 +14,16 @@
         </div>
 
 
-        <div class="progress">
-          	<progress class="progress progress-success" value="25" max="100">25%</progress>
-          </div>
+      
+
+      <div id="page-wrapper">
+      	<p class="styled">
+      		<meter min="0" max="100" low="25" high="75" optimum="100" value="50"></meter>
+      	</p>
+      </div>
+
+
+
         </div>
     </div>
 </ion-view>
