@@ -77,7 +77,19 @@ angular.module('SpoonFeedMe.services', [])
     saveRecipe: function(recipe) {
       StorageService.saveSingleRecipe(recipe);
     },
-
+    getImages: function(ingredients) {
+      for (i=0; i<ingredients.length; i++) {
+        var ingr = ingredients[i]; 
+        ingredients[i] = ingr.replace(/,/g, '');
+      }
+      var strIngredients = ingredients.toString();
+      return $http.get("http://45.55.223.121/images", {params: {'ingredients': strIngredients}}).then (
+        function(payload) {
+          return payload.data;
+        },
+        function(error) {
+          console.log("Error", error.status);
+        });
     // Used for testing
     setSearchPayload: function(payload) {
       searchPayload = payload;
