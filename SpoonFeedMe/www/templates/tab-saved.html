@@ -1,12 +1,10 @@
 <ion-view view-title="Saved Recipes">
-  <ion-content>
+  <ion-content delegate-handle="content" overflow-scroll="true">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in saved" type="item-text-wrap" href="#/tab/saved/{{$index}}/saved">
+      <ion-item class="recipe-item item-remove-animate item-thumbnail-left item-icon-right" ng-repeat="recipe in saved" type="item-text-wrap" href="#/tab/saved/{{$index}}/saved">
         <img ng-src="{{recipe.imgUrl}}">
-        <h2>{{recipe.name}}</h2>
-        <p>{{recipe.summary}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-
+        <h2 class="recipe-name">{{recipe.name}}</h2>
+        <i class="icon ion-chevron-right icon-accessory my-chevron-right"></i>
         <ion-option-button class="button-assertive" ng-click="remove(recipe)">
           Delete
         </ion-option-button>

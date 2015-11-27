@@ -1,18 +1,19 @@
 <ion-view view-title="Search">
-  <ion-content class="padding">
+  <ion-content>
     <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search" ng-model="search.query">
-      </label>
-      <button class="button" ng-click="getRecipes(search.query)">Search</button>
+      <div class="item item-input">
+        <form ng-submit="getRecipes(search.query)" style="width: 90%;">
+          <input type="search" placeholder="Search" ng-model="search.query" class="search-input">
+        </form>
+        <i class="icon ion-search recipe-search-icon" ng-click="getRecipes(search.query)" type="submit"></i>
+      </div>
     </div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="recipe in content" type="item-text-wrap" href="#/tab/search/{{$index}}/search">
-        <img ng-src="{{recipe.imgUrl}}"></img>
-        <h2>{{recipe.name}}</h2>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-        <ion-option-button class="button-balanced" ng-click="saveRecipe(recipe)">
+      <ion-item class="recipe-item item-remove-animate item-thumbnail-left item-icon-right" ng-repeat="recipe in content" type="item-text-wrap" href="#/tab/search/{{$index}}/search">
+        <img ng-src="{{recipe.imgUrl}}">
+        <h2 class="recipe-name">{{recipe.name}}</h2>
+        <i class="icon ion-chevron-right icon-accessory my-chevron-right"></i>
+        <ion-option-button class="button-balanced save-btn" ng-click="saveRecipe(recipe)">
           Save
         </ion-option-button>
       </ion-item>

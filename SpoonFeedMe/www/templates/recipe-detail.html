@@ -1,9 +1,3 @@
-<!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
--->
 <ion-view view-title="{{single.name}}">
   <ion-content class="padding">
     <img ng-src="{{single.imgUrl}}" style="width: 64px; height: 64px"></img>
@@ -17,7 +11,7 @@
       <p> {{i}} </p>
     </ul>
     <center>
-      <a class="button" href="#/walkthrough/{{recipeId}}/{{fromSavedOrSearch}}">Walkthrough</a>
+      <a class="button android-btn" href="#/walkthrough/{{recipeId}}/{{fromSavedOrSearch}}">Walkthrough</a>
     </center>
   </ion-content>
 </ion-view>
