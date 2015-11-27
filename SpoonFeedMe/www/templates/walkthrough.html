@@ -7,7 +7,14 @@
           <button class="col-50 button android-btn" ng-click="changeHigh()">Faster</button>
           <button class="col-50 button android-btn" ng-click="help()">Help</button>
 
+<p>
+  <div> 
+    <div>
+    <img ng-src="{{single.imgUrl}}" style="width: 240px; height: 240px">
+  </div>
+</div>
 
+</p>
 
 	</ion-content>
 
@@ -23,7 +30,7 @@
    
       <div id="page-wrapper">
       	<p class="styled">
-      		<meter id="progress" max="100" low="25" high="75" optimum="100" value="25"></meter>
+      		<meter id="progress" max="{{max}}" low="25" high="100" optimum="100" value="{{percentageThrough}}"></meter>
       	</p>
       </div>   
 

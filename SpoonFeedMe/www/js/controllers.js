@@ -71,23 +71,31 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   $scope.currentStepNum = 1;
   $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
   $scope.maxStepNum = $scope.recipe.instructions.length;
-  
+  $scope.percentageThrough = ($scope.currentStepNum/$scope.maxStepNum)*100;
+  $scope.max = ($scope.maxStepNum/$scope.maxStepNum)*100;
 
   $scope.nextStep = function() {
 
     $scope.currentStepNum+=1;
     $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
-
+    $scope.percentageThrough = ($scope.currentStepNum/$scope.maxStepNum)*100;
+    $scope.max = ($scope.maxStepNum/$scope.maxStepNum)*100;
   }
 
   $scope.prevStep = function() {
 
     $scope.currentStepNum-=1;
     $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+    $scope.percentageThrough = $scope.currentStepNum/$scope.maxStepNum;
+    $scope.max = $scope.maxStepNum;
 
   }
 
 $scope.rate = 0.8;
+var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+$scope.single = payload;
+
+
 
     $scope.changeLow = function(){
       // alert('ouch');
