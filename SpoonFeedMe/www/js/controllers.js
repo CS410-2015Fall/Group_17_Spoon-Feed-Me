@@ -62,6 +62,8 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 // Controller for recipe instruction walkthrough
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
 
+
+
   $scope.recipeId = $stateParams.recipeId;
   var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[$scope.recipeId];
   $scope.recipe = payload;
@@ -69,6 +71,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   $scope.currentStepNum = 1;
   $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
   $scope.maxStepNum = $scope.recipe.instructions.length;
+  
 
   $scope.nextStep = function() {
 
@@ -84,14 +87,36 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   }
 
+$scope.rate = 0.8;
+
+    $scope.changeLow = function(){
+      // alert('ouch');
+      $scope.rate = 0.5;
+    }
+
+    $scope.changeHigh = function(){
+      $scope.rate = 1.2;
+    }
+
+
+    $scope.help = function(){
+      alert("Welcome to Help\nHere are some guidlines");
+      alert("To read the step = Say 'Read'");
+      alert("To go to the next step = Say 'Next'");
+      alert("To go to the previous step = Say 'Back' or 'Previous'");
+      alert("To slow down the pace of the instruction = Say 'Slower'");
+      alert("To speed up the pace of the instruction = Say 'Faster'"); 
+    }
+
     $scope.voice = function(){
       $scope.recognition.abort();
      var text = $scope.currentStep;
+     var pace = $scope.rate;
 
 window.TTS.speak({
         text: text,
-        locale: 'en-GB',
-        rate: 1
+        locale: 'en-CA',
+        rate: pace
     }, function () {
         //alert('success');
         //alert("Starting voice recognition...");
@@ -116,7 +141,13 @@ window.TTS.speak({
           // alert("I heard back...");
           $scope.prevStep();
           $scope.$apply();
-        } else if(heardValue == "read") {
+        }else if(heardValue == "slower"){
+          $scope.changeLow();
+        } else if (heardValue == "faster"){
+          $scope.changeHigh();
+        }
+
+        else if((heardValue == "read") || (heardValue == "what") || (heardValue == "repeat")){
           // Call to text to speech plugin
           
           //alert("Stopping voice recognition...");
@@ -127,7 +158,10 @@ window.TTS.speak({
         }
       }
     }
-    alert("Starting voice recognition...");
+
+    
+    alert("Voice Recognition Activated\nWelcome to WalkThrough");    
+
     $scope.recognition.start();
 
   });
