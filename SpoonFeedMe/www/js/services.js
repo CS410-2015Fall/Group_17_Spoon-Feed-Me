@@ -90,6 +90,7 @@ angular.module('SpoonFeedMe.services', [])
         function(error) {
           console.log("Error", error.status);
         });
+    },
     // Used for testing
     setSearchPayload: function(payload) {
       searchPayload = payload;
