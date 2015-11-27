@@ -90,8 +90,8 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
 window.TTS.speak({
         text: text,
-        locale: 'en-GB',
-        rate: 1
+        locale: 'en-CA',
+        rate: 0.8
     }, function () {
         //alert('success');
         //alert("Starting voice recognition...");
@@ -116,7 +116,7 @@ window.TTS.speak({
           // alert("I heard back...");
           $scope.prevStep();
           $scope.$apply();
-        } else if(heardValue == "read") {
+        } else if((heardValue == "read") || (heardValue == "what") || (heardValue == "repeat")){
           // Call to text to speech plugin
           
           //alert("Stopping voice recognition...");
