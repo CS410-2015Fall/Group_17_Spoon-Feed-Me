@@ -88,6 +88,10 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   }
 
 $scope.rate = 0.8;
+var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+$scope.single = payload;
+
+
 
     $scope.changeLow = function(){
       // alert('ouch');
