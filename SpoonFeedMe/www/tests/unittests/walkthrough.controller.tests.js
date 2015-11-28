@@ -33,10 +33,7 @@ describe('TestWalkthroughController', function() {
                         "Step Two"]}]
 
 
-    // load controller's module
-    beforeEach(module('SpoonFeedMe.controllers'));
-
-    beforeEach(module(function($provide) {
+    beforeEach(module('SpoonFeedMe.controllers', function($provide) {
         $provide.value('RecipeService', recipeServiceMock);
     }));
 
@@ -52,7 +49,7 @@ describe('TestWalkthroughController', function() {
         });
     }));
 
-    describe("after initializaiton", function() {
+    describe("test after initilization", function() {
         it("scope values should be initialized", function() {
             expect(scope.recipeId).toEqual(0);
             expect(scope.recipe).toBe(payload[0]);
@@ -69,12 +66,11 @@ describe('TestWalkthroughController', function() {
         });
 
         it("before entering view, onresult is not defined", function() {
-            expect(scope.recognition.onresult).toBe(undefined);
+            expect(scope.recognition.onresult).toBeUndefined();
         });
 
-        it("after entering view, voice recognition should be running", function() {
-            //scope.nextStep=jasmine.createSpy();
-
+        it("after entering view, voice recognition is running", function() {
+            // Trigger $ionicView.beforeEnter 
             scope.$emit('$ionicView.beforeEnter');
             // We expect that the voice recognition will have
             // started after entering the view
@@ -82,7 +78,7 @@ describe('TestWalkthroughController', function() {
         });
 
         it("after entering view, onresult is not undefined", function() {
-            expect(scope.recognition.onresult).not.toBe(undefined);
+            expect(scope.recognition.onresult).not.toBeUndefined;
         });
 
         describe("test voice inputs", function() {
@@ -92,25 +88,24 @@ describe('TestWalkthroughController', function() {
             // the testing scope (no dollar sign)
             //
             // The reason for this is that it results in errors
-            // to leave it as $scope.handleVoiceInput, like it is
-            // set when $ionicView.beforeEnter event occurs. I suspect
-            // this is because $scope and scope are slightly different
+            // to leave it as $scope.handleVoiceInput (with $). I suspect
+            // this is because we assign references to $scope to our
+            // mock recognition object defined above.
 
             beforeEach(function() {
                 scope.recognition.onresult = scope.handleVoiceInput;
             });
 
-            it("calls nextStep when user says 'next'", function() {
+            it("calls nextStep() when user says 'next'", function() {
 
                 spyOn(scope,'nextStep');
                 var mockEvent = new MockEvent('next');
                 scope.recognition.onresult(mockEvent);
 
-                // When recognition 'hears' next, call nextStep()
                 expect(scope.nextStep).toHaveBeenCalled();
             });
 
-            it("calls prevStep when user says 'back' or 'previous", function() {
+            it("calls prevStep() upon certain commands", function() {
 
                 spyOn(scope,'prevStep');
 
@@ -124,12 +119,7 @@ describe('TestWalkthroughController', function() {
                 });
             });
 
-            // TODO: Slower/faster
-            // maybe after adjusting the slower/faster to be
-            // a gradiant (e.g. so you can return to normal speed)
-
-            // TODO: stopping voice recognition?
-            it("calls voice upon certain commands", function() {
+            it("calls voice() upon certain commands", function() {
 
                 spyOn(scope,'voice');
 
