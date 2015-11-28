@@ -125,33 +125,35 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
             });
         }
 
-        $scope.$on("$ionicView.beforeEnter", function() {
-            $scope.recognition.onresult = function(event) {
-                if (event.results.length > 0) {
-                    var heardValue = event.results[0][0].transcript;
-                    if (heardValue == "next") {
-                        // alert("I heard next...");
-                        $scope.nextStep();
-                        $scope.$apply();
-                    } else if ((heardValue == "back") || (
-                        heardValue == "previous")) {
-                        // alert("I heard back...");
-                        $scope.prevStep();
-                        $scope.$apply();
-                    } else if (heardValue == "slower") {
-                        $scope.changeLow();
-                    } else if (heardValue == "faster") {
-                        $scope.changeHigh();
-                    } else if ((heardValue == "read") || (
-                        heardValue == "what") || (
-                        heardValue == "repeat")) {
-                        // Call to text to speech plugin
-                        //alert("Stopping voice recognition...");
-                        $scope.recognition.stop();
-                        $scope.voice();
-                    }
+        $scope.handleVoiceInput = function(event) {
+            if (event.results.length > 0) {
+                var heardValue = event.results[0][0].transcript;
+                if (heardValue == "next") {
+                    // alert("I heard next...");
+                    $scope.nextStep();
+                    $scope.$apply();
+                } else if ((heardValue == "back") || (
+                    heardValue == "previous")) {
+                    // alert("I heard back...");
+                    $scope.prevStep();
+                    $scope.$apply();
+                } else if (heardValue == "slower") {
+                    $scope.changeLow();
+                } else if (heardValue == "faster") {
+                    $scope.changeHigh();
+                } else if ((heardValue == "read") || (
+                    heardValue == "what") || (
+                    heardValue == "repeat")) {
+                    // Call to text to speech plugin
+                    //alert("Stopping voice recognition...");
+                    $scope.recognition.stop();
+                    $scope.voice();
                 }
             }
+        }
+
+        $scope.$on("$ionicView.beforeEnter", function() {
+            $scope.recognition.onresult = $scope.handleVoiceInput;
             alert(
                 "Voice Recognition Activated\nWelcome to WalkThrough"
             );
@@ -162,4 +164,6 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
             alert("Stopping voice recognition...");
             $scope.recognition.abort();
         });
+
+
     })
