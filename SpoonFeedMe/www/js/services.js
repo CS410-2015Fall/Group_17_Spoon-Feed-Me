@@ -84,7 +84,7 @@ angular.module('SpoonFeedMe.services', [])
     },
     getSearchPayload: function() {
       return searchPayload;
-    }
+    },
   };
 })
 
