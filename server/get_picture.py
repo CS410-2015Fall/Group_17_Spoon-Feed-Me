@@ -1,5 +1,6 @@
 from lxml import html
 import requests
+import sanitize_ingredients
 
 import logging
 
@@ -10,9 +11,10 @@ def picture(ingredients):
 	headers = {'User-Agent': ua, 'Accept': '*/*'}
 
 	all_imgs = {}
-	for ingredient in ingredients:
-		extra_stuff = '&tbm=isch'
-		query = 'https://www.google.ca/search?q=' + ingredient + extra_stuff
+	extra_stuff = '&tbm=isch'
+	for ingredient in ingredients.split(','):
+		sanitized_ingr = sanitize_ingredients.sanitize(ingredient)
+		query = 'https://www.google.ca/search?q=' + sanitized_ingr + extra_stuff
 
 		try:
 			page = requests.get(query, headers=headers, timeout=2)
