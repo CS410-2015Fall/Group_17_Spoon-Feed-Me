@@ -40,7 +40,16 @@ angular.module('SpoonFeedMe.services', [])
       }
       savedRecipes.push(recipe);
       $localstorage.setObject('savedRecipes', savedRecipes);
+    },
+
+    // For testing purposes
+    getSavedRecipes: function() {
+      return savedRecipes;
+    },
+    setSavedRecipes: function(recipe) {
+      savedRecipes = recipe;
     }
+
   }
 })
 
