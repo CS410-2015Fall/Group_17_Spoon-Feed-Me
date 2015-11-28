@@ -54,15 +54,13 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
   $scope.single = payload;
   $scope.instructions = payload.instructions;
-  $scope.ingredients = payload.ingredients; 
+  $scope.ingredients = payload.ingredients;
 
 })
 
 
 // Controller for recipe instruction walkthrough
 .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicHistory, RecipeService) {
-
-
 
   $scope.recipeId = $stateParams.recipeId;
   var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[$scope.recipeId];
@@ -91,49 +89,39 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   }
 
-$scope.rate = 0.8;
-var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
-$scope.single = payload;
+  $scope.rate = 0.8;
+  var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+  $scope.single = payload;
 
+  $scope.changeLow = function(){
+    $scope.rate = 0.5;
+  }
 
+  $scope.changeHigh = function(){
+    $scope.rate = 1.2;
+  }
 
-    $scope.changeLow = function(){
-      // alert('ouch');
-      $scope.rate = 0.5;
-    }
+  $scope.help = function(){
+    alert("Welcome to Help\nHere are some guidlines");
+    alert("To read the step = Say 'Read'");
+    alert("To go to the next step = Say 'Next'");
+    alert("To go to the previous step = Say 'Back' or 'Previous'");
+    alert("To slow down the pace of the instruction = Say 'Slower'");
+    alert("To speed up the pace of the instruction = Say 'Faster'");
+  }
 
-    $scope.changeHigh = function(){
-      $scope.rate = 1.2;
-    }
-
-
-    $scope.help = function(){
-      alert("Welcome to Help\nHere are some guidlines");
-      alert("To read the step = Say 'Read'");
-      alert("To go to the next step = Say 'Next'");
-      alert("To go to the previous step = Say 'Back' or 'Previous'");
-      alert("To slow down the pace of the instruction = Say 'Slower'");
-      alert("To speed up the pace of the instruction = Say 'Faster'"); 
-    }
-
-    $scope.voice = function(){
-      $scope.recognition.abort();
-     var text = $scope.currentStep;
-     var pace = $scope.rate;
-
-window.TTS.speak({
-        text: text,
-        locale: 'en-CA',
-        rate: pace
+  $scope.voice = function(){
+    var text = $scope.currentStep;
+    var pace = $scope.rate;
+    window.TTS.speak({
+      text: text,
+      locale: 'en-CA',
+      rate: pace
     }, function () {
-        //alert('success');
-        //alert("Starting voice recognition...");
         $scope.recognition.start();
     }, function (reason) {
         alert(reason);
     });
-
-    
   }
 
   $scope.$on("$ionicView.beforeEnter", function() {
@@ -141,34 +129,25 @@ window.TTS.speak({
     $scope.recognition.onresult = function(event) {
       if (event.results.length > 0) {
         var heardValue = event.results[0][0].transcript;
-        if(heardValue == "next") {
-          // alert("I heard next...");
+        if(heardValue == "next" && ($scope.currentStepNum != $scope.maxStepNum)) {
           $scope.nextStep();
           $scope.$apply();
-        } else if((heardValue == "back") || (heardValue == "previous")) {
-          // alert("I heard back...");
+        } else if((heardValue == "back") || (heardValue == "previous") && ($scope.currentStepNum != 1)) {
           $scope.prevStep();
           $scope.$apply();
-        }else if(heardValue == "slower"){
+        } else if(heardValue == "slower"){
           $scope.changeLow();
         } else if (heardValue == "faster"){
           $scope.changeHigh();
-        }
-
-        else if((heardValue == "read") || (heardValue == "what") || (heardValue == "repeat")){
-          // Call to text to speech plugin
-          
-          //alert("Stopping voice recognition...");
-          $scope.recognition.stop();
-
+        } else if((heardValue == "read") || (heardValue == "what") || (heardValue == "repeat")){
+          $scope.recognition.abort();
           $scope.voice();
-
         }
       }
     }
 
-    
-    alert("Voice Recognition Activated\nWelcome to WalkThrough");    
+
+    alert("Voice Recognition Activated\nWelcome to WalkThrough");
 
     $scope.recognition.start();
 
