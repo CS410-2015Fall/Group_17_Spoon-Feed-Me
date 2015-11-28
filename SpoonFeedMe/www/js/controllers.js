@@ -116,7 +116,6 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   }
 
   $scope.voice = function(){
-    $scope.recognition.abort();
     var text = $scope.currentStep;
     var pace = $scope.rate;
 
@@ -157,7 +156,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
           heardValue == "repeat")) {
           // Call to text to speech plugin
           //alert("Stopping voice recognition...");
-          $scope.recognition.stop();
+          $scope.recognition.abort();
           $scope.voice();
       }
     }
