@@ -20,6 +20,10 @@ describe('TestWalkthroughController', function() {
         abort: function() { this.running=false },
     };
 
+    var TTSMock = {
+        speak: function() {}
+    };
+
     // Mock recipe payload
     var payload = [{"name": "Mock Recipe", 
         "ingredients": ["First Ingredient", 
@@ -42,6 +46,7 @@ describe('TestWalkthroughController', function() {
         scope = $rootScope.$new();
         stateparams = {recipeId : 0};
         recipeServiceMock.getRecipes = jasmine.createSpy().and.returnValue(payload);
+        window.TTS = TTSMock;
         $controller('WalkthroughCtrl', {
             $scope: scope, 
             $stateParams: stateparams,
@@ -140,6 +145,18 @@ describe('TestWalkthroughController', function() {
                 });
             });
 
+        });
+
+        describe("when I call voice function", function() {
+
+            beforeEach(function() {
+                spyOn(window.TTS,'speak');
+                scope.voice();
+            });
+
+            it("it reads out the current step", function() {
+                expect(window.TTS.speak).toHaveBeenCalled();
+            });
         });
 
         it("before leaving view, abort voice recognition", function() {
