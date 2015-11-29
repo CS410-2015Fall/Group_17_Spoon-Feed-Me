@@ -12,11 +12,6 @@
     font-weight: bold;
 }
 
-.item h3.step-in{
-  margin-top: 40px;
-  font-weight: bold;
-}
-
 .search-input {
     font-size: 20px !important;
     line-height: 30px !important;
@@ -48,11 +43,6 @@
     outline: 0;
     -webkit-tap-highlight-color: transparent;
 }
-
-
-
-
-
 
 *, *:before, *:after {
   -moz-box-sizing: border-box;
