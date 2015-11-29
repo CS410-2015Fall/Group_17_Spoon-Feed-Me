@@ -9,12 +9,24 @@
     <div style="position: absolute; bottom: 0px; width: 100%">
         <div style="text-align: center">
                  <div class="row">
-  		    <button class="col-50 button android-btn" ng-show="currentStepNum > 1" ng-click="prevStep()">Back</button>
-  		    <button class="col-50 button android-btn" ng-show="currentStepNum < maxStepNum" ng-click="nextStep()">Next</button>
+  		        
+          <div style="position: relative; left: 0px; width: 50%">
+          
+          <button class="col-50 button android-btn" ng-show="currentStepNum > 1" ng-click="prevStep()">Back</button>
+       
+          </div>
+
+          <div style="position: relative; right: 0px; width: 50%">
+
+          <button class="col-50 button android-btn" ng-show="currentStepNum < maxStepNum" ng-click="nextStep()">Next</button>
+
+
+          </div>
+
         </div>
+      </div>
 
-
-   
+      <div style = "text-align: center">
       <div id="page-wrapper">
       	<p class="styled">
       		<meter id="progress" max="{{max}}" low="25" high="100" optimum="100" value="{{percentageThrough}}"></meter>
@@ -26,6 +38,7 @@
 
         </div>
     </div>
+
 </ion-view>
 
 
