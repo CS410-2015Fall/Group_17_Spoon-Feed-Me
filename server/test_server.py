@@ -4,6 +4,7 @@ import json
 
 import mock_yummly
 import mock_recipe
+import sanitize_ingredients
 
 class TestServer(unittest.TestCase):
 
@@ -48,6 +49,22 @@ class TestServer(unittest.TestCase):
 		self.assertEqual('Set oven to broil.', instructions[0])
 		self.assertEqual('Spread butter on one side of each slice of bread. Place apple slices on buttered side of bread. Sprinkle cinnamon on top. Place bread on a baking sheet.', instructions[1])
 		self.assertEqual('Place in a preheated oven until toasted, about 2 minutes.', instructions[2])
+
+	def test_sanitize_ingredients(self):
+		urls = mock_yummly.search('turkeysandwich')[0]
+
+		ingredients = urls[2]
+
+		self.assertEqual('cooked turkey', sanitize_ingredients.sanitize(ingredients[0]))
+		self.assertEqual('celery ribs,', sanitize_ingredients.sanitize(ingredients[1]))
+		self.assertEqual('small onion,', sanitize_ingredients.sanitize(ingredients[2]))
+		self.assertEqual('hard-cooked eggs,', sanitize_ingredients.sanitize(ingredients[3]))
+		self.assertEqual('mayonnaise', sanitize_ingredients.sanitize(ingredients[4]))
+		self.assertEqual('salt', sanitize_ingredients.sanitize(ingredients[5]))
+		self.assertEqual('pepper', sanitize_ingredients.sanitize(ingredients[6]))
+		self.assertEqual('hamburger buns,', sanitize_ingredients.sanitize(ingredients[7]))
+
+
 
 if __name__ == '__main__':
     unittest.main()
