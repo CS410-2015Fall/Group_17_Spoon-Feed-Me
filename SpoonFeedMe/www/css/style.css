@@ -12,6 +12,12 @@
     font-weight: bold;
 }
 
+.step {
+  font-weight: bold;
+  text-align: center;
+
+}
+
 .search-input {
     font-size: 20px !important;
     line-height: 30px !important;
