@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <img ng-src="{{single.imgUrl}}" ></img>
     <h3> Ingredients </h3>
-    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="(key, value) in ingredients">
+    <ion-item class="image-table item-remove-animate item-avatar item-icon-right" ng-repeat="(key, value) in ingredients">
       <img ng-src="{{value}}" style="width: 64px; height: 64px"></img>
       <h3>{{key}}</h3>
     </ion-item>
