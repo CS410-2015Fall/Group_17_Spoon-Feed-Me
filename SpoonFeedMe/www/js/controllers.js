@@ -159,7 +159,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     $ionicPopup.alert({
        title: 'Voice Recognition Enabled',
        templateUrl: 'templates/popup.html',
-       okText:'Got it!',
+       okText:'OK',
        cssClass: 'myPopupClass'
      });
 
