@@ -126,6 +126,29 @@ h1 {
 }
 
 
+.myPopupClass .popup {
+width: 500px;
+}
+
+.myPopupClass .popup-head {
+    background: #69c773;
+}
+
+.myPopupClass .button {
+  display: inline-block;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8em;
+  background: #69c773;
+  border-bottom: 1px solid #498b50;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold;
+  margin: 0 0.25rem;
+  text-align: center;
+}
+
 
 
 
