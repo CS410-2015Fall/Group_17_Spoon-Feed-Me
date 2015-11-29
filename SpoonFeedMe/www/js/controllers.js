@@ -5,7 +5,6 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 .controller('VoiceCtrl', function($scope, $stateParams) {
 
   ionic.Platform.ready(function(){
-    // alert("Creating speech recognition handler...");
     $scope.recognition = new SpeechRecognition();
   });
 
@@ -95,7 +94,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     }
   }
 
-  $scope.rate = 0.8;
+  $scope.rate = 0.9;
 
   $scope.changeLow = function() {
     alert('Slowing down!');

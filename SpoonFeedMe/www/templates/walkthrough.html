@@ -1,47 +1,26 @@
 <ion-nav-view view-title="{{recipe.name}}">
 	<ion-content class="padding" style ="margin-top: 150px;">
-      <p class = "step">{{currentStep}}</p>  
+    <p class = "step">{{currentStep}}</p>
 	</ion-content>
     <!-- align to the bottom of the page -->
-
-
-
     <div style="position: absolute; bottom: 0px; width: 100%">
-        <div style="text-align: center">
-                 <div class="row">
-  		        
+      <div style="text-align: center">
+        <div class="row">
           <div style="position: relative; left: 0px; width: 50%">
-          
           <button class="col-50 button android-btn" ng-show="currentStepNum > 1" ng-click="prevStep()">Back</button>
-       
           </div>
-
           <div style="position: relative; right: 0px; width: 50%">
-
           <button class="col-50 button android-btn" ng-show="currentStepNum < maxStepNum" ng-click="nextStep()">Next</button>
-
-
           </div>
-
         </div>
       </div>
 
       <div style = "text-align: center">
-      <div id="page-wrapper">
-      	<p class="styled">
-      		<meter id="progress" max="{{max}}" value="{{percentageThrough}}"></meter>
-      	</p>
-      </div>   
-
-
-
-
+        <div id="page-wrapper">
+          <p class="styled">
+            <meter id="progress" max="{{max}}" value="{{percentageThrough}}"></meter>
+          </p>
         </div>
+      </div>
     </div>
-
-</ion-view>
-
-
-
-
 </ion-nav-view>
