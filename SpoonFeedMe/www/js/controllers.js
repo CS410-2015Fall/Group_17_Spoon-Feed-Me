@@ -96,7 +96,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     }
   }
 
-$scope.rate = 0.9;
+$scope.rate = 0.8;
 
     $scope.changeLow = function(){
        alert('Slowing down!');
