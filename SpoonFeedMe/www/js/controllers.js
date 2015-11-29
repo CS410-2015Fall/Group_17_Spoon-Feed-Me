@@ -92,6 +92,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     if($scope.currentStepNum > 1) {
       $scope.currentStepNum-=1;
       $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+      $scope.percentageThrough = ($scope.currentStepNum/$scope.maxStepNum)*100;
     }
   }
 
