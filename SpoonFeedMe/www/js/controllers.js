@@ -68,7 +68,7 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
 
 // Controller for recipe instruction walkthrough
-.controller('WalkthroughCtrl', function($scope, $stateParams, RecipeService) {
+.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicPopup,RecipeService) {
     
   $scope.recipeId = $stateParams.recipeId;
   var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[$scope.recipeId];
@@ -89,6 +89,16 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   $scope.prevStep = function() {
 
+    $scope.currentStepNum-=1;
+    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+
+  }
+
+$scope.rate = 0.8;
+
+    $scope.changeLow = function(){
+       alert('Slowing down!');
+      $scope.rate = 0.5;
     if($scope.currentStepNum > 1) {
         $scope.currentStepNum-=1;
         $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
@@ -101,18 +111,12 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     $scope.rate = 0.5;
   }
 
+    $scope.changeHigh = function(){
+      alert('Speeding up!');
+      $scope.rate = 1.2;
+    }
   $scope.changeHigh = function(){
     $scope.rate = 1.2;
-  }
-
-
-  $scope.help = function(){
-    alert("Welcome to Help\nHere are some guidlines");
-    alert("To read the step = Say 'Read'");
-    alert("To go to the next step = Say 'Next'");
-    alert("To go to the previous step = Say 'Back' or 'Previous'");
-    alert("To slow down the pace of the instruction = Say 'Slower'");
-    alert("To speed up the pace of the instruction = Say 'Faster'"); 
   }
 
   $scope.voice = function(){
@@ -163,15 +167,20 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   }
 
   $scope.$on("$ionicView.beforeEnter", function() {
+    
+    // popup alert
+    $ionicPopup.alert({
+       title: 'Voice Recognition Enabled',
+       templateUrl: 'templates/popup.html',
+       okText:'Got it!',
+       cssClass: 'myPopupClass'
+     });
+
     $scope.recognition.onresult = $scope.handleVoiceInput;
-    alert(
-        "Voice Recognition Activated\nWelcome to WalkThrough"
-    );
     $scope.recognition.start();
   });
 
   $scope.$on("$ionicView.beforeLeave", function() {
-    alert("Stopping voice recognition...");
     $scope.recognition.abort();
   });
 })
