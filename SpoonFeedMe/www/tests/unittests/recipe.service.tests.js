@@ -20,6 +20,11 @@ describe('RecipeService', function() {
 		    "12 OREO Cookies, coarsely crushed"
 	]}];
 
+	// Dummy recipe-imageURL mapping
+	var mockImages = {"First Ingredient": "url1",	
+										"Second Ingredient": "url2",
+										"Third Ingredient": "url3"}
+
 	//Load the app module
 	beforeEach(module('SpoonFeedMe'));
 
@@ -55,7 +60,7 @@ describe('RecipeService', function() {
     /*
      * Test RecipeService.getFromSearch
      */ 
-	describe('#getFromSearch', function() {
+	describe('when I call getFromSearch', function() {
 
 		var deferredSearchResults;
 
@@ -76,11 +81,43 @@ describe('RecipeService', function() {
 		// variable matches the results that the SearchService returned
 		it('if successful, should set searchPayload to results', function() {
 			deferredSearchResults.promise.then(function(results) {
+				expect(results).toBe(searchPayload);
 				expect(recipeService.getRecipes('search')).toBe(searchPayload);
 			});
 			deferredSearchResults.resolve(searchPayload);
 			$rootScope.$digest();
 		
+		});
+	});
+
+	/*
+     * Test RecipeService.getImages
+     */ 
+	describe('When I call RecipeService.getImages', function() {
+
+		var deferredSearchResults;
+
+		beforeEach(inject(function(_$rootScope_, $q) {
+			deferredSearchResults = $q.defer();
+			searchServiceMock.getImages = jasmine.createSpy().and.returnValue(deferredSearchResults.promise);
+
+			$rootScope = _$rootScope_;
+			result = recipeService.getImages('dummy ingredients');
+		}));
+
+		// expect that RecipeService.getFromSearch calls SearchService.search
+		it("should call getImages on searchService", function() {
+			expect(searchServiceMock.getImages).toHaveBeenCalledWith('dummy ingredients');
+		});
+
+		// expects that the value saved to RecipeService's searchPayload
+		// variable matches the results that the SearchService returned
+		it('if successful, should return results', function() {
+			deferredSearchResults.promise.then(function(results) {
+				expect(results).toEqual(mockImages);
+			});
+			deferredSearchResults.resolve(mockImages);
+			$rootScope.$digest();		
 		});
 	});
 
