@@ -29,7 +29,7 @@ def search(search_terms):
 		recipe_source = recipe['source']
 		recipe_img = recipe['images']
 
-		url = (recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines, recipe_img[0].hostedSmallUrl, recipe.totalTime, recipe.yields)
+		url = (recipe.name, recipe_source['sourceRecipeUrl'], recipe.ingredientLines, recipe_img[0].hostedLargeUrl, recipe.totalTime, recipe.yields)
 		urls.append(url)
 
 	return urls

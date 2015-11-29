@@ -1,13 +1,14 @@
 <ion-view view-title="{{single.name}}">
   <ion-content class="padding">
-    <img ng-src="{{single.imgUrl}}" style="width: 64px; height: 64px">
+    <img ng-src="{{single.imgUrl}}" ></img>
     <h3> Ingredients </h3>
-    <ul ng-repeat="i in ingredients">
-      <li>{{i}}</li>
-    </ul>
+    <ion-item class="image-table item-remove-animate item-avatar item-icon-right" ng-repeat="(key, value) in ingredients">
+      <img ng-src="{{value}}" style="width: 64px; height: 64px"></img>
+      {{key}}
+    </ion-item>
     <h3> Instructions </h3>
     <ul ng-repeat="i in instructions">
-      <p> {{i}} </p>
+    <li type="square">{{i}}</li>
     </ul>
     <center>
       <a class="button android-btn" href="#/walkthrough/{{recipeId}}/{{fromSavedOrSearch}}">Walkthrough</a>

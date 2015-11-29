@@ -9,7 +9,10 @@
 
 .item h2.recipe-name{
     margin-top:30px;
-    font-weight: bold;
+}
+
+.step {
+  text-align: center;
 }
 
 .search-input {
@@ -24,13 +27,8 @@
 .button.android-btn {
     border-color: #3FC380;
     background-color: #3FC380;
-    box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
-    color: black;
-    font-weight: bold;
+    color: white;
     text-transform: uppercase;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
-    -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
     display: inline-block;
     height: 36px;
     padding: 0 1.2rem;
@@ -44,11 +42,6 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-
-
-
-
-
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -56,7 +49,7 @@
 }
 
 html {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: font-family: 'Quicksand', sans-serif;
   font-size: 100%;
   background: #333;
 }
@@ -65,9 +58,7 @@ html {
   width: 300px;
   background: #FFFFFF;
   padding: 1em;
-  margin: 0.5em ;
-  border-top: 2px solid #69c773;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  margin: 0 auto ;
 }
 
 h1 {
@@ -82,17 +73,15 @@ h1 {
 
   width: 100%;
   height: 20px;
-  
+
   /* For Firefox */
   background: #EEE;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.2) inset;
   border-radius: 3px;
 }
 
 /* WebKit */
 .styled meter::-webkit-meter-bar {
   background: #EEE;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
   border-radius: 3px;
 }
 
@@ -103,7 +92,7 @@ h1 {
 }
 
 .styled meter::-webkit-meter-optimum-value {
-  background: #86CC00;
+  background: #3FC380;
 }
 
 .styled meter::-webkit-meter-suboptimum-value {
@@ -121,7 +110,7 @@ h1 {
 }
 
 .styled meter:-moz-meter-optimum::-moz-meter-bar {
-  background: #86CC00;
+  background: #3FC380;
 }
 
 .styled meter:-moz-meter-sub-optimum::-moz-meter-bar {
@@ -132,7 +121,16 @@ h1 {
   background: #CC4600;
 }
 
-button {
+
+.myPopupClass .popup {
+  width: 500px;
+}
+
+.myPopupClass .popup-head {
+  background: #69c773;
+}
+
+.myPopupClass .button {
   display: inline-block;
   border-radius: 3px;
   border: none;
@@ -142,21 +140,15 @@ button {
   border-bottom: 1px solid #498b50;
   color: white;
   -webkit-font-smoothing: antialiased;
-  font-weight: bold;
   margin: 0 0.25rem;
   text-align: center;
 }
 
-button:hover, button:focus {
-  opacity: 0.75;
-  cursor: pointer;
+.image-table {
+  border-style: none;
 }
 
-button:active {
-  opacity: 1;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1) inset;
+.myPopupClass .popup-title {
+  color: white;
 }
-
-
-
 
