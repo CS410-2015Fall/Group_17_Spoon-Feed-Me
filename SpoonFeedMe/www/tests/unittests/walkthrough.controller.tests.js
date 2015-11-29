@@ -1,5 +1,5 @@
 describe('TestWalkthroughController', function() {
-    var scope,stateparams;
+    var scope,stateparams,ionicPopup;
     var recipeServiceMock = {};
 
     // Mock event objects
@@ -44,12 +44,14 @@ describe('TestWalkthroughController', function() {
     beforeEach(inject(function($rootScope,$controller) {
         $rootScope.recognition = recognitionMock;
         scope = $rootScope.$new();
+        ionicPopup = {alert: function() {}};
         stateparams = {recipeId : 0};
         recipeServiceMock.getRecipes = jasmine.createSpy().and.returnValue(payload);
         window.TTS = TTSMock;
         $controller('WalkthroughCtrl', {
             $scope: scope, 
             $stateParams: stateparams,
+            $ionicPopup: ionicPopup,
             RecipeService: recipeServiceMock
         });
     }));
@@ -75,6 +77,7 @@ describe('TestWalkthroughController', function() {
         });
 
         it("after entering view, voice recognition is running", function() {
+            ionicPopup.alert = jasmine.createSpy();
             // Trigger $ionicView.beforeEnter 
             scope.$emit('$ionicView.beforeEnter');
             // We expect that the voice recognition will have
