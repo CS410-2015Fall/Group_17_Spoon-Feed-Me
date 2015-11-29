@@ -174,7 +174,7 @@ $scope.rate = 0.8;
     $ionicPopup.alert({
        title: 'Voice Recognition Enabled',
        templateUrl: 'templates/popup.html',
-       okText:'Got it!',
+       okText:'OK',
        cssClass: 'myPopupClass'
      });
 

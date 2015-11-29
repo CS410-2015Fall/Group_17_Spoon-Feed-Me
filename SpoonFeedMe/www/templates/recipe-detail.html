@@ -4,11 +4,11 @@
     <h3> Ingredients </h3>
     <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="(key, value) in ingredients">
       <img ng-src="{{value}}" style="width: 64px; height: 64px"></img>
-      <h3>{{key}}</h3>
+      {{key}}
     </ion-item>
     <h3> Instructions </h3>
     <ul ng-repeat="i in instructions">
-      <p> {{i}} </p>
+    <li type="square">{{i}}</li>
     </ul>
     <center>
       <a class="button android-btn" href="#/walkthrough/{{recipeId}}/{{fromSavedOrSearch}}">Walkthrough</a>
