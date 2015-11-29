@@ -63,13 +63,13 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
   });
   $scope.single = payload;
   $scope.instructions = payload.instructions;
-   
+
 })
 
 
 // Controller for recipe instruction walkthrough
-.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicPopup,RecipeService) {
-    
+.controller('WalkthroughCtrl', function($scope, $stateParams, $ionicPopup, RecipeService) {
+
   $scope.recipeId = $stateParams.recipeId;
   var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[$scope.recipeId];
   $scope.recipe = payload;
@@ -81,14 +81,13 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
 
   $scope.nextStep = function() {
     if($scope.currentStepNum < $scope.maxStepNum) {
-        $scope.currentStepNum+=1;
-        $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
-        $scope.percentageThrough = ($scope.currentStepNum/$scope.maxStepNum)*100;
+      $scope.currentStepNum+=1;
+      $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+      $scope.percentageThrough = ($scope.currentStepNum/$scope.maxStepNum)*100;
     }
   }
 
   $scope.prevStep = function() {
-
     if($scope.currentStepNum > 1) {
       $scope.currentStepNum-=1;
       $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
@@ -96,28 +95,20 @@ angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
     }
   }
 
-$scope.rate = 0.8;
+  $scope.rate = 0.8;
 
-    $scope.changeLow = function(){
-       alert('Slowing down!');
-      $scope.rate = 0.5;
-    if($scope.currentStepNum > 1) {
-        $scope.currentStepNum-=1;
-        $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
-        $scope.percentageThrough = $scope.currentStepNum/$scope.maxStepNum;
-    }
-  }
-  
-  $scope.changeLow = function(){
-    // alert('ouch');
+  $scope.changeLow = function() {
+    alert('Slowing down!');
     $scope.rate = 0.5;
+    if($scope.currentStepNum > 1) {
+      $scope.currentStepNum-=1;
+      $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum-1];
+      $scope.percentageThrough = $scope.currentStepNum/$scope.maxStepNum;
+    }
   }
 
-    $scope.changeHigh = function(){
-      alert('Speeding up!');
-      $scope.rate = 1.2;
-    }
   $scope.changeHigh = function(){
+    alert('Speeding up!');
     $scope.rate = 1.2;
   }
 
@@ -125,64 +116,60 @@ $scope.rate = 0.8;
     var text = $scope.currentStep;
     var pace = $scope.rate;
 
-    window.TTS.speak({
-      text: text,
-      locale: 'en-CA',
-      rate: pace
-      }, 
-      function () {
-      //alert('success');
-      //alert("Starting voice recognition...");
-        $scope.recognition.start();
-      }, 
-      function (reason) {
-        alert(reason);
-      }
-    );   
+  window.TTS.speak({
+    text: text,
+    locale: 'en-CA',
+    rate: pace
+    },
+    function () {
+      $scope.recognition.start();
+    },
+    function (reason) {
+      alert(reason);
+    }
+  );
   }
 
   $scope.handleVoiceInput = function(event) {
     if (event.results.length > 0) {
       var heardValue = event.results[0][0].transcript;
       if (heardValue == "next") {
-          // alert("I heard next...");
-          $scope.nextStep();
-          $scope.$apply();
+        $scope.nextStep();
+        $scope.$apply();
       } else if ((heardValue == "back") || (
           heardValue == "previous")) {
-          // alert("I heard back...");
-          $scope.prevStep();
-          $scope.$apply();
+        $scope.prevStep();
+        $scope.$apply();
       } else if (heardValue == "slower") {
-          $scope.changeLow();
+        $scope.changeLow();
       } else if (heardValue == "faster") {
-          $scope.changeHigh();
+        $scope.changeHigh();
       } else if ((heardValue == "read") || (
-          heardValue == "what") || (
-          heardValue == "repeat")) {
-          // Call to text to speech plugin
-          //alert("Stopping voice recognition...");
-          $scope.recognition.abort();
-          $scope.voice();
+        heardValue == "what") || (
+        heardValue == "repeat")) {
+        // Call to text to speech plugin
+        $scope.recognition.abort();
+        $scope.voice();
       }
     }
   }
 
   $scope.$on("$ionicView.beforeEnter", function() {
-    
     // popup alert
     $ionicPopup.alert({
        title: 'Voice Recognition Enabled',
        templateUrl: 'templates/popup.html',
-       okText:'Got it!',
+       okText:'OK',
        cssClass: 'myPopupClass'
      });
 
     $scope.recognition.onresult = $scope.handleVoiceInput;
     $scope.recognition.start();
+    window.plugins.insomnia.keepAwake();
   });
 
   $scope.$on("$ionicView.beforeLeave", function() {
     $scope.recognition.abort();
+    window.plugins.insomnia.allowSleepAgain();
   });
 })

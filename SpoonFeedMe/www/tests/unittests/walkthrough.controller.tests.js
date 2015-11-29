@@ -24,6 +24,13 @@ describe('TestWalkthroughController', function() {
         speak: function() {}
     };
 
+    var mockPlugins = {
+        insomnia: {
+            keepAwake: function() {},
+            allowSleepAgain: function() {}
+        }
+    }
+
     // Mock recipe payload
     var payload = [{"name": "Mock Recipe", 
         "ingredients": ["First Ingredient", 
@@ -45,9 +52,11 @@ describe('TestWalkthroughController', function() {
         $rootScope.recognition = recognitionMock;
         scope = $rootScope.$new();
         ionicPopup = {alert: function() {}};
+        insomniaMock = {keepAwake: function() {}};
         stateparams = {recipeId : 0};
         recipeServiceMock.getRecipes = jasmine.createSpy().and.returnValue(payload);
         window.TTS = TTSMock;
+        window.plugins = mockPlugins;
         $controller('WalkthroughCtrl', {
             $scope: scope, 
             $stateParams: stateparams,
@@ -78,11 +87,14 @@ describe('TestWalkthroughController', function() {
 
         it("after entering view, voice recognition is running", function() {
             ionicPopup.alert = jasmine.createSpy();
+            window.plugins.insomnia.keepAwake = jasmine.createSpy();
             // Trigger $ionicView.beforeEnter 
             scope.$emit('$ionicView.beforeEnter');
             // We expect that the voice recognition will have
             // started after entering the view
             expect(scope.recognition.running).toBe(true);
+            expect(ionicPopup.alert).toHaveBeenCalled();
+            expect(window.plugins.insomnia.keepAwake).toHaveBeenCalled();
         });
 
         it("after entering view, onresult is not undefined", function() {
@@ -142,8 +154,6 @@ describe('TestWalkthroughController', function() {
 
                     // simulate the fact that the voice recognition
                     // will restart after the voice function runs
-
-                    // TODO: restart voice at this point? 
                     scope.recognition.start();
                 });
             });
@@ -163,9 +173,11 @@ describe('TestWalkthroughController', function() {
         });
 
         it("before leaving view, abort voice recognition", function() {
+            window.plugins.insomnia.allowSleepAgain = jasmine.createSpy();
             expect(scope.recognition.running).toBe(true);
             scope.$emit('$ionicView.beforeLeave');
             expect(scope.recognition.running).toBe(false);
+            expect(window.plugins.insomnia.allowSleepAgain).toHaveBeenCalled();
         });
     });
 

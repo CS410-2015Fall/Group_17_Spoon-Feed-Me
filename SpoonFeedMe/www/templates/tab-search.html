@@ -11,7 +11,7 @@
     <ion-list>
       <ion-item class="recipe-item item-remove-animate item-thumbnail-left item-icon-right" ng-repeat="recipe in content" type="item-text-wrap" href="#/tab/search/{{$index}}/search">
         <img ng-src="{{recipe.imgUrl}}">
-        <h2 class="recipe-name">{{recipe.name}}</h2>
+        {{recipe.name}}
         <i class="icon ion-chevron-right icon-accessory my-chevron-right"></i>
         <ion-option-button class="button-balanced save-btn" ng-click="saveRecipe(recipe)">
           Save
