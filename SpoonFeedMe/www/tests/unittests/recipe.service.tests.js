@@ -145,5 +145,59 @@ describe('RecipeService', function() {
      			expect(storageServiceMock.allSavedRecipes).toHaveBeenCalled();
      		});
      	});
+     	describe("when I call RecipeService.removeRecipeFromSaved", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.removeSavedRecipe = jasmine.createSpy();
+     	 		recipeService.removeRecipeFromSaved('dummy Recipe');
+     		}));
+     		
+     		it('calls StorageService.removeSavedRecipe()', function() {
+     			expect(storageServiceMock.removeSavedRecipe).toHaveBeenCalled();
+     		});
+     	});
+
+     	describe("when I call RecipeService.getRecipeFromSaved", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.getSingleRecipe = jasmine.createSpy();
+     	 		recipeService.getRecipeFromSaved(0);
+     		}));
+     		
+     		it('calls StorageService.getSingleRecipe()', function() {
+     			expect(storageServiceMock.getSingleRecipe).toHaveBeenCalled();
+     		});
+     	});
+
+     	describe("when I call RecipeService.removeRecipeFromSaved", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.removeSavedRecipe = jasmine.createSpy();
+     	 		recipeService.removeRecipeFromSaved('dummy Recipe');
+     		}));
+     		
+     		it('calls StorageService.removeSavedRecipe()', function() {
+     			expect(storageServiceMock.removeSavedRecipe).toHaveBeenCalled();
+     		});
+     	});
+
+     	describe("when I call RecipeService.getRecipeFromSaved", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.getSingleRecipe = jasmine.createSpy();
+     	 		recipeService.getRecipeFromSaved(0);
+     		}));
+     		
+     		it('calls StorageService.getSingleRecipe()', function() {
+     			expect(storageServiceMock.getSingleRecipe).toHaveBeenCalled();
+     		});
+     	});
+
+     	describe("when I call RecipeService.saveRecipe", function() {
+     		beforeEach(inject(function() {
+     	 		storageServiceMock.saveSingleRecipe = jasmine.createSpy();
+     	 		recipeService.saveRecipe('recipe');
+     		}));
+     		
+     		it('calls StorageService.saveSingleRecipe()', function() {
+     			expect(storageServiceMock.saveSingleRecipe).toHaveBeenCalled();
+     		});
+     	});
      });
 });
