@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/controllers.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> controllers.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.44% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>68/72</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88.24% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>15/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>16/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.44% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>68/72</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('SpoonFeedMe.controllers', ['ionic.utils'])
+  // Controller for SpeechRecognition object creation
+  .controller('VoiceCtrl', <span class="fstat-no" title="function not covered" >function($scope, $stateParams) {</span>
+<span class="cstat-no" title="statement not covered" >    ionic.Platform.ready(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      $scope.recognition = new SpeechRecognition();</span>
+    });
+  })
+&nbsp;
+&nbsp;
+  // Controller for recipe search
+  .controller('SearchCtrl', function($scope, $ionicLoading, RecipeService) {
+    $scope.content = "";
+&nbsp;
+    $scope.getRecipes = function(searchTerms) {
+      $ionicLoading.show({
+        template: '&lt;ion-spinner icon="android"&gt;&lt;/ion-spinner&gt;',
+        animation: 'fade-in'
+      });
+      RecipeService.getFromSearch(searchTerms).then(function(recipeData) {
+        $scope.content = recipeData;
+        $ionicLoading.hide();
+      });
+    }
+&nbsp;
+    $scope.saveRecipe = function(recipe) {
+      RecipeService.saveRecipe(recipe);
+    }
+  })
+&nbsp;
+&nbsp;
+  // Contoller for saved recipes
+  .controller('SavedCtrl', function($scope, RecipeService) {
+    $scope.$on("$ionicView.beforeEnter", function() {
+      $scope.saved = RecipeService.allRecipesFromSaved();
+    });
+&nbsp;
+    $scope.remove = function(recipe) {
+      RecipeService.removeRecipeFromSaved(recipe);
+    };
+  })
+&nbsp;
+&nbsp;
+  // Controller for individual recipe details
+  .controller('RecipeDetailCtrl', function($scope, $stateParams, RecipeService) {
+    $scope.recipeId = $stateParams.recipeId;
+    $scope.fromSavedOrSearch = $stateParams.fromSavedOrSearch;
+    var rate = 0.9;
+    var payload = RecipeService.getRecipes($scope.fromSavedOrSearch)[$scope.recipeId];
+    var images = RecipeService.getImages(payload.ingredients);
+    var tempIngredients = {};
+&nbsp;
+    for (i = 0; i &lt; payload.ingredients.length; i++) {
+      tempIngredients[payload.ingredients[i]] = "";
+    }
+&nbsp;
+    $scope.ingredients = tempIngredients;
+    images.then(function(response) {
+      $scope.ingredients = response;
+    });
+&nbsp;
+    $scope.single = payload;
+&nbsp;
+    $scope.instructions = payload.instructions;
+  })
+&nbsp;
+&nbsp;
+  // Controller for recipe instruction walkthrough
+  .controller('WalkthroughCtrl', function($scope, $stateParams, $ionicPopup,
+    RecipeService) {
+ 
+    // Some initial values
+    $scope.recipeId = $stateParams.recipeId;
+    var payload = RecipeService.getRecipes($stateParams.fromSavedOrSearch)[
+      $scope.recipeId];
+    $scope.recipe = payload;
+    $scope.currentStepNum = 1;
+    $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum - 1];
+    $scope.maxStepNum = $scope.recipe.instructions.length;
+    $scope.percentageThrough = ($scope.currentStepNum / $scope.maxStepNum) *
+      100;
+    $scope.max = ($scope.maxStepNum / $scope.maxStepNum) * 100;
+  
+    $scope.nextStep = function() {
+      if ($scope.currentStepNum &lt; $scope.maxStepNum) {
+        $scope.currentStepNum += 1;
+        $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum -
+          1];
+        $scope.percentageThrough = ($scope.currentStepNum / $scope.maxStepNum) *
+          100;
+      }
+    }
+  
+    $scope.prevStep = function() {
+      if ($scope.currentStepNum &gt; 1) {
+        $scope.currentStepNum -= 1;
+        $scope.currentStep = $scope.recipe.instructions[$scope.currentStepNum -
+          1];
+        $scope.percentageThrough = ($scope.currentStepNum / $scope.maxStepNum) *
+          100;
+      }
+    }
+  
+    $scope.voice = function() {
+      var text = $scope.currentStep;
+      var pace = $scope.rate;
+      window.TTS.speak({
+        text: text,
+        locale: 'en-CA',
+        rate: pace
+      }, <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        $scope.recognition.start();</span>
+      }, <span class="fstat-no" title="function not covered" >function(reason) {</span>
+<span class="cstat-no" title="statement not covered" >        alert(reason);</span>
+      });
+    }
+ 
+    $scope.handleVoiceInput = function(event) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (event.results.length &gt; 0) {
+        var heardValue = event.results[0][0].transcript;
+        if (heardValue == "next") {
+          $scope.nextStep();
+          $scope.$apply();
+        } else if ((heardValue == "back") || (heardValue == "previous")) {
+          $scope.prevStep();
+          $scope.$apply();
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>if ((heardValue == "read") || (heardValue == "what") || (
+          heardValue == "repeat")) {
+          // Call to text to speech plugin
+          $scope.recognition.abort();
+          $scope.voice();
+        }
+      }
+    }
+&nbsp;
+    $scope.$on("$ionicView.beforeEnter", function() {
+      // popup alert
+      $ionicPopup.alert({
+        title: 'Voice Recognition Enabled',
+        templateUrl: 'templates/popup.html',
+        okText: 'OK',
+        cssClass: 'myPopupClass'
+      });
+      $scope.recognition.onresult = $scope.handleVoiceInput;
+      $scope.recognition.start();
+      window.plugins.insomnia.keepAwake();
+    });
+  
+    $scope.$on("$ionicView.beforeLeave", function() {
+      $scope.recognition.abort();
+      window.plugins.insomnia.allowSleepAgain();
+    });
+  })</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Nov 29 2015 18:23:09 GMT-0800 (PST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
